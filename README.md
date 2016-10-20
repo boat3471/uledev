@@ -1,7 +1,3 @@
-<meta charset="utf-8">
-<style>
-html, body { font-family: "微软雅黑"; }
-</style>
 # uledev
 用于构建邮乐个人开发环境
 
