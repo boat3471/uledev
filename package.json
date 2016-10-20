@@ -1,11 +1,11 @@
 {
 	"name": "uledev",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "ule",
 	"main": "index.js",
 	"author": "xinwenchao",
 	"license": "ISC",
-	"bin": "./bin/hello",
+	"bin": "./bin/hello.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
