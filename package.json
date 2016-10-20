@@ -1,8 +1,8 @@
 {
 	"name": "uledev",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "ule",
-	"main": "./lib/index.js",
+	"main": "./lib/main.js",
 	"author": "xinwenchao",
 	"license": "ISC",
 	"bin": "./bin/uledev-cmd",

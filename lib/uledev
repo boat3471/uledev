@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /* ule前端项目开发启动器 */
+require('../lib/ule-modules/console');
+require('../lib/ule-modules/init');
 var app = require('./uledev-main');
 var http = require('http');
 var port = normalizePort(process.env.PORT || '80');
