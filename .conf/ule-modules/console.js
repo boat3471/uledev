@@ -1,5 +1,5 @@
 /** Created by xinwenchao on 2016/9/7. */
-var assert = require('assert');
+var assert = require('assert'); 
 
 global.log = function(){};
 global.info = function(){};
