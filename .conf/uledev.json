@@ -1,0 +1,16 @@
+{
+	"hostsPath": "C:/WINDOWS/System32/drivers/etc/hosts",
+	"hosts": [
+		"i0.dev.ule.com",
+		"i1.dev.ule.com",
+		"i2.dev.ule.com",
+		"www.dev.ule.com"
+	],
+	"beta-ftp": {
+		"host": "",
+		"port": "",
+		"type": "ssh",
+		"user": "",
+		"pwd": ""
+	}
+}
