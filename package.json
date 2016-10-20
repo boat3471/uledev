@@ -1,6 +1,6 @@
 {
 	"name": "uledev",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"description": "ule",
 	"main": "./lib/main.js",
 	"author": "xinwenchao",
