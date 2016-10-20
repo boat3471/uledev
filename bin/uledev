@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 var args = process.argv.slice(2);
-console.info(args);
 var usage = [ ''
 	, '  Usage: stylus [options] [command] [< in [> out]]'
 	, '                [file|dir ...]'
@@ -43,7 +42,7 @@ var usage = [ ''
 	, '    -V, --version           Display the version of Stylus'
 	, '    -h, --help              Display help information'
 	, ''
-].join('');
+].join('\n');
 var arg;
 while (args.length) {
 	arg = args.shift();
