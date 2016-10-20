@@ -1,3 +1,6 @@
+node_modules
+webroot
 .npmignore
+.gitignore
 .git
 .idea

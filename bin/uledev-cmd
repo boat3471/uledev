@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-var uledev = require('../lib/uledev');
+require('../lib/ule-modules/console');
+require('../lib/ule-modules/init');
+require('../lib/uledev');
 
 var args = process.argv.slice(2);
 var usage = [ ''

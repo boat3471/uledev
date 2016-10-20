@@ -2,10 +2,10 @@
 	"name": "uledev",
 	"version": "1.0.7",
 	"description": "ule",
-	"main": "index.js",
+	"main": "./lib/index.js",
 	"author": "xinwenchao",
 	"license": "ISC",
-	"bin": "./bin/uledev",
+	"bin": "./bin/uledev-cmd",
 	"dependencies": {
 		"body-parser": "~1.15.1",
 		"cookie-parser": "~1.4.3",
