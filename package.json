@@ -3,6 +3,8 @@
 	"version": "1.0.0",
 	"description": "ule",
 	"main": "index.js",
+	"author": "xinwenchao",
+	"license": "ISC",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -10,8 +12,6 @@
 		"type": "git",
 		"url": "git+https://github.com/boat3471/uledev.git"
 	},
-	"author": "xinwenchao",
-	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/boat3471/uledev/issues"
 	},
