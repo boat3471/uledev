@@ -6,6 +6,16 @@
 	"author": "xinwenchao",
 	"license": "ISC",
 	"bin": "./bin/uledev",
+	"dependencies": {
+		"body-parser": "~1.15.1",
+		"cookie-parser": "~1.4.3",
+		"debug": "~2.2.0",
+		"ejs": "~2.4.1",
+		"express": "~4.13.4",
+		"morgan": "~1.7.0",
+		"serve-favicon": "~2.3.0",
+		"stylus": "0.54.5"
+	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -16,5 +26,23 @@
 	"bugs": {
 		"url": "https://github.com/boat3471/uledev/issues"
 	},
-	"homepage": "https://github.com/boat3471/uledev#readme"
+	"homepage": "https://github.com/boat3471/uledev#readme",
+	"dependencyDescription": {
+		"serve-favicon": "用于网页图标中间件",
+		"morgan": "用于打印nodejs 服务器接受到的请求的信息。",
+		"body-parser": "用于解析客户端请求的body中的内容, 处理json, post等数据",
+		"cookie-parser": "用于获取web浏览器发送的cookie中的内容",
+		"debug": "打印的是开发者自己在 控制台 打印的信息，它的目的是要代替 console.log()",
+		"ejs": "一个模版技术",
+		"express": "Web应用开发框架",
+		"stylus": "CSS的预处理框架",
+		"multer": "文件上传",
+		"minify": "CSS和JS压缩和削减, 文件合并",
+		"gulp": "是一个自动化构建工具",
+		"gulp-stylus": "CSS的预处理框架",
+		"gulp-sourcemaps": "生成源码映射文件, 将转换代码和原始代码对应, 方便查错",
+		"gulp-autoprefixer": "用于自动处理浏览器前缀-不考虑浏览器兼容前缀",
+		"mongodb": "用于操作mongodb数据库",
+		"mongoose": "提供管理mongodb数据库的一套工具"
+	}
 }
