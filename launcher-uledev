@@ -1,0 +1,3 @@
+#!/usr/bin/env node
+var launcher = require('./lib/main.js');
+launcher.run();
