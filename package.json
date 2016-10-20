@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"author": "xinwenchao",
 	"license": "ISC",
-	"bin": "./bin/hello.js",
+	"bin": "./bin/uledev",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
