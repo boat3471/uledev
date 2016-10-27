@@ -47,9 +47,13 @@ function run(){
 	var defaultConfigPath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
 	var configPath = path.normalize(path.join(__cmdPath, 'uledev.json'));
 	var defaultConfig = require(defaultConfigPath);
-	var config = require(configPath);
-	global.uledev = config || defaultConfig;
-	global.uledev.cmd = __cmdPath;
+	var exists = fs.existsSync(configPath);
+	var config = exists ? require(configPath) : undefined;
+	var ule = config || defaultConfig;
+	global.ule = ule;
+	global.ule.cmd = path.normalize(__cmdPath);
+	global.ule.hostsPath = ule.hostsPath;
+	global.ule.hosts = ule.hosts;
 	//启动
 	var uledevPath = path.normalize(path.join(__dirname, '../lib/uledev'));
 	var uledev = require(uledevPath);
@@ -58,7 +62,7 @@ function run(){
 
 /* 初始化ULE开发环境 */
 function init(){
-	initLaunchFile();
+	//initLaunchFile();
 	initConfig();
 	initDirectory();
 	console.info('[OK] 初始化完成!');
