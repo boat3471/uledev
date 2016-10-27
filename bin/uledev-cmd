@@ -45,30 +45,54 @@ function init(){
 	initLaunchFile();
 	initConfig();
 	initDirectory();
+	console.info('[OK] 初始化完成!');
 }
 
 /* 初始化启动文件 */
 function initLaunchFile(){
-	//console.info('[OK] 初始化开发环境启动器');
+	var fileName = 'uledev-server';
+	var filePath = path.normalize(path.join(cmdPath, fileName));
+	var exists = fs.existsSync(filePath);
+	if(exists) return;
+
+	var content = [
+		'#!/usr/bin/env node',
+		'var uledev = require("uledev");',
+		'uledev.launch();'
+	].join('\n');
+	fs.writeFileSync(filePath, content);
+	console.info('[OK] 创建启动文件: ', fileName);
 }
 
 /* 初始化配置文件 */
 function initConfig(){
+	var fileName = 'uledev.json';
 	var sourcePath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
-	var sourceData = require(sourcePath);
-	var targetPath = path.normalize(path.join(cmdPath, 'uledev.json'));
-	var targetContent = JSON.stringify(sourceData, null, 4);
+	var targetPath = path.normalize(path.join(cmdPath, fileName));
 	var exists = fs.existsSync(targetPath);
-	if(!exists){
-		fs.writeFile(targetPath, targetContent, function(err){
-			err && console.error(err);
-		});
-	}
-	console.info('[OK] 初始化开发环境配置文件');
+	if(exists) return;
+
+	var sourceData = require(sourcePath);
+	var targetContent = JSON.stringify(sourceData, null, 4);
+	fs.writeFileSync(targetPath, targetContent);
+	console.info('[OK] 创建配置文件: ', fileName);
 }
 
 /* 初始化目录结构 */
 function initDirectory(){
+	mkdirs('wwwroot');
+	mkdirs('webroot');
+}
 
-	//console.info('[OK] 初始化开发环境目录结构');
+function mkdirs(){
+	var list = Array.prototype.slice.apply(arguments);
+	var dirPath = cmdPath;
+	while(list.length){
+		var name = list.shift();
+		dirPath = path.normalize(path.join(dirPath, name));
+		var exists = fs.existsSync(dirPath);
+		if(exists) continue;
+		fs.mkdirSync(dirPath);
+		console.info('[OK] 创建目录: ', name);
+	}
 }

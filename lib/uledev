@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /* ule前端项目开发启动器 */
+require('./ule-modules/console');
+require('./ule-modules/init');
 module.exports = {
 	launch: function(){
 		var app = require('./uledev-main');
