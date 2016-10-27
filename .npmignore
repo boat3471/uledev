@@ -1,6 +1,7 @@
 node_modules
 webroot
-launcher-uledev
+wwwroot
+launcher
 .npmignore
 .gitignore
 .git

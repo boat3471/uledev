@@ -1,19 +1,74 @@
 #!/usr/bin/env node
-var args = process.argv.slice(2);
-var usage = [ ''
-	, '  Options:'
-	, '    -h, --help              Display help information'
-	, ''
-].join('\n');
-var arg;
-while (args.length) {
+var fs = require('fs');
+var path = require('path');
+var cmdPath = process.cwd();
+var packagePath = path.normalize(path.join(__dirname, '../package.json'));
+var packageData = require(packagePath);
+var name = packageData && (packageData.name || '');
+var version = packageData && (packageData.version || '');
+var description = packageData && (packageData.description || '');
+
+var arg, args = process.argv.slice(2);
+if(args.length == 0) console.info(description);
+while(args.length){
 	arg = args.shift();
-	switch (arg) {
+	switch(arg){
 		case '-h':
 		case '-help':
-			console.error(usage);
+			console.error([''
+				, '  uledev 命令:'
+				, '    -h, --help              显示帮助信息'
+				, '    -v, --version           显示版本号'
+				// , '    -s, start               运行ULE开发环境, 也'
+				, '    init                    初始化ULE开发环境'
+				, ''
+			].join('\n'));
 			break;
-		case '':
+		case '-v':
+		case '--version':
+			console.info(name, version);
+			break;
+		case 'init':
+			init();
+			break;
+		case '-s':
+		case 'start':
+			break;
+		default:
+			console.info('无效命令, 请执行 uledev -h/--help 查询命令');
 			break;
 	}
+}
+
+/* 初始化ULE开发环境 */
+function init(){
+	initLaunchFile();
+	initConfig();
+	initDirectory();
+}
+
+/* 初始化启动文件 */
+function initLaunchFile(){
+	//console.info('[OK] 初始化开发环境启动器');
+}
+
+/* 初始化配置文件 */
+function initConfig(){
+	var sourcePath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
+	var sourceData = require(sourcePath);
+	var targetPath = path.normalize(path.join(cmdPath, 'uledev.json'));
+	var targetContent = JSON.stringify(sourceData, null, 4);
+	var exists = fs.existsSync(targetPath);
+	if(!exists){
+		fs.writeFile(targetPath, targetContent, function(err){
+			err && console.error(err);
+		});
+	}
+	console.info('[OK] 初始化开发环境配置文件');
+}
+
+/* 初始化目录结构 */
+function initDirectory(){
+
+	//console.info('[OK] 初始化开发环境目录结构');
 }
