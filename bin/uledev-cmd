@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 var fs = require('fs');
 var path = require('path');
-var cmdPath = process.cwd();
 var packagePath = path.normalize(path.join(__dirname, '../package.json'));
 var packageData = require(packagePath);
 var name = packageData && (packageData.name || '');
 var version = packageData && (packageData.version || '');
 var description = packageData && (packageData.description || '');
+
+var __cmdPath = process.cwd();
 
 var arg, args = process.argv.slice(2);
 if(args.length == 0) console.info(description);
@@ -19,7 +20,7 @@ while(args.length){
 				, '  uledev 命令:'
 				, '    -h, --help              显示帮助信息'
 				, '    -v, --version           显示版本号'
-				// , '    -s, start               运行ULE开发环境, 也'
+				, '    -s, start               运行ULE开发环境'
 				, '    init                    初始化ULE开发环境'
 				, ''
 			].join('\n'));
@@ -33,11 +34,26 @@ while(args.length){
 			break;
 		case '-s':
 		case 'start':
+			run();
 			break;
 		default:
 			console.info('无效命令, 请执行 uledev -h/--help 查询命令');
 			break;
 	}
+}
+
+function run(){
+	//读取默认配置文件
+	var defaultConfigPath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
+	var configPath = path.normalize(path.join(__cmdPath, 'uledev.json'));
+	var defaultConfig = require(defaultConfigPath);
+	var config = require(configPath);
+	global.uledev = config || defaultConfig;
+	global.uledev.cmd = __cmdPath;
+	//启动
+	var uledevPath = path.normalize(path.join(__dirname, '../lib/uledev'));
+	var uledev = require(uledevPath);
+	uledev.launch();
 }
 
 /* 初始化ULE开发环境 */
@@ -51,7 +67,7 @@ function init(){
 /* 初始化启动文件 */
 function initLaunchFile(){
 	var fileName = 'uledev-server';
-	var filePath = path.normalize(path.join(cmdPath, fileName));
+	var filePath = path.normalize(path.join(__cmdPath, fileName));
 	var exists = fs.existsSync(filePath);
 	if(exists) return;
 
@@ -68,7 +84,7 @@ function initLaunchFile(){
 function initConfig(){
 	var fileName = 'uledev.json';
 	var sourcePath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
-	var targetPath = path.normalize(path.join(cmdPath, fileName));
+	var targetPath = path.normalize(path.join(__cmdPath, fileName));
 	var exists = fs.existsSync(targetPath);
 	if(exists) return;
 
@@ -86,7 +102,7 @@ function initDirectory(){
 
 function mkdirs(){
 	var list = Array.prototype.slice.apply(arguments);
-	var dirPath = cmdPath;
+	var dirPath = __cmdPath;
 	while(list.length){
 		var name = list.shift();
 		dirPath = path.normalize(path.join(dirPath, name));
