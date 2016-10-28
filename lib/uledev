@@ -39,7 +39,7 @@ module.exports = {
 			var bind = typeof addr === 'string'
 				? 'pipe ' + addr
 				: 'port ' + addr.port;
-			log('启动成功！ 监听端口：' + bind);
+			log('启动成功！ 监听端口：' + addr.port);
 		}
 
 		function normalizePort(val){
