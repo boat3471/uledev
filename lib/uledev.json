@@ -6,11 +6,14 @@
 		"i2.dev.ule.com",
 		"www.dev.ule.com"
 	],
-	"beta-ftp": {
-		"host": "",
-		"port": "",
-		"type": "ssh",
-		"user": "",
-		"pwd": ""
+	"port": 80,
+	"beta": {
+		"ftp": {
+			"host": "",
+			"port": "",
+			"type": "ssh",
+			"user": "",
+			"pwd": ""
+		}
 	}
 }

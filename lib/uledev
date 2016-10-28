@@ -4,9 +4,9 @@ require('./ule-modules/console');
 require('./ule-modules/init');
 module.exports = {
 	launch: function(){
-		var app = require('./uledev-main');
+		var app = require('./ule-modules/main');
 		var http = require('http');
-		var port = normalizePort(process.env.PORT || '80');
+		var port = normalizePort(process.env.PORT || ule.port);
 		app.set('port', port);
 
 		var server = http.createServer(app);
@@ -22,23 +22,24 @@ module.exports = {
 				: 'Port ' + port;
 			switch(error.code){
 				case 'EACCES':
-					console.error(bind + ' requires elevated privileges');
+					error('权限不足，无法启动 ' + bind + ' 端口！');
 					process.exit(1);
 					break;
 				case 'EADDRINUSE':
-					console.error(bind + ' is already in use');
+					console.error('端口: ' + bind + ' 被占用！');
 					process.exit(1);
 					break;
 				default:
 					throw error;
 			}
 		}
+
 		function onListening(){
 			var addr = server.address();
 			var bind = typeof addr === 'string'
 				? 'pipe ' + addr
 				: 'port ' + addr.port;
-			log('开发环境启动成功！ 监听端口：' + bind);
+			log('启动成功！ 监听端口：' + bind);
 		}
 
 		function normalizePort(val){

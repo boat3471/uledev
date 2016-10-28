@@ -1,6 +1,6 @@
 {
 	"name": "uledev",
-	"version": "1.0.14",
+	"version": "1.0.15",
 	"description": "一个基于Nodejs搭建的ULE前端开发部署环境",
 	"main": "./lib/uledev",
 	"author": "xinwenchao",
@@ -14,7 +14,9 @@
 		"express": "~4.13.4",
 		"morgan": "~1.7.0",
 		"serve-favicon": "~2.3.0",
-		"stylus": "0.54.5"
+		"stylus": "0.54.5",
+		"extend": "3.0.0",
+		"ftp": "0.3.10"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"

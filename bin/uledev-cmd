@@ -1,77 +1,87 @@
 #!/usr/bin/env node
 var fs = require('fs');
 var path = require('path');
-var packagePath = path.normalize(path.join(__dirname, '../package.json'));
-var packageData = require(packagePath);
-var name = packageData && (packageData.name || '');
-var version = packageData && (packageData.version || '');
-var description = packageData && (packageData.description || '');
+var extend = require('extend');
+var __cmdname = process.cwd();
+var __ule = {
+	name: '',
+	version: '',
+	description: '',
+	author: '',
+	cmd: __cmdname,
+	hostsPath: '',
+	hosts: [],
+	path: {
+		packageJson: path.normalize(path.join(__dirname, '../package.json')),
+		defaultJson: path.normalize(path.join(__dirname, '../lib/uledev.json')),
+		ownJson: path.normalize(path.join(__cmdname, 'uledev.json'))
+	}
+};
+var initfinished = fs.existsSync(__ule.path.ownJson);
+/* 初始化ULE开发环境 */
+function init(){
+	var args = process.argv.slice(2), arg;
+	var packageData = require(__ule.path.packageJson);
+	var configData = initfinished ? require(__ule.path.ownJson) : require(__ule.path.defaultJson);
 
-var __cmdPath = process.cwd();
+	__ule.name = (packageData && packageData.name);
+	__ule.version = (packageData && packageData.version);
+	__ule.description = (packageData && packageData.description);
+	__ule.author = (packageData && packageData.author);
 
-var arg, args = process.argv.slice(2);
-if(args.length == 0) console.info(description);
-while(args.length){
-	arg = args.shift();
-	switch(arg){
-		case '-h':
-		case '-help':
-			console.error([''
-				, '  uledev 命令:'
-				, '    -h, --help              显示帮助信息'
-				, '    -v, --version           显示版本号'
-				, '    -s, start               运行ULE开发环境'
-				, '    init                    初始化ULE开发环境'
-				, ''
-			].join('\n'));
-			break;
-		case '-v':
-		case '--version':
-			console.info(name, version);
-			break;
-		case 'init':
-			init();
-			break;
-		case '-s':
-		case 'start':
-			run();
-			break;
-		default:
-			console.info('无效命令, 请执行 uledev -h/--help 查询命令');
-			break;
+	extend(__ule, configData);
+	global.__cmdname = __cmdname;
+	global.ule = __ule;
+
+	if(args.length == 0) console.info(__ule.description);
+
+	while(args.length){
+		arg = args.shift();
+		switch(arg){
+			case '-h':
+			case '-help':
+				console.error([''
+					, '  uledev 命令:'
+					, '    -h, --help              显示帮助信息'
+					, '    -v, --version           显示版本号'
+					, '    -s, start               运行ULE开发环境'
+					, '    init                    初始化ULE开发环境'
+					, ''
+				].join('\n'));
+				break;
+			case '-v':
+			case '--version':
+				console.info(__ule.name, __ule.version);
+				break;
+			case 'init':
+			case '-s':
+			case 'start':
+				if(!initfinished) {
+					//initLaunchFile();
+					initConfig();
+					initDirectory();
+					console.info('[OK] 初始化完成!');
+				}
+				start();
+				break;
+			default:
+				console.info('无效命令, 请执行 uledev -h/--help 查询命令');
+				break;
+		}
 	}
 }
 
-function run(){
-	//读取默认配置文件
-	var defaultConfigPath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
-	var configPath = path.normalize(path.join(__cmdPath, 'uledev.json'));
-	var defaultConfig = require(defaultConfigPath);
-	var exists = fs.existsSync(configPath);
-	var config = exists ? require(configPath) : undefined;
-	var ule = config || defaultConfig;
-	global.ule = ule;
-	global.ule.cmd = path.normalize(__cmdPath);
-	global.ule.hostsPath = ule.hostsPath;
-	global.ule.hosts = ule.hosts;
-	//启动
+/* 开启ULEDEV */
+function start(){
 	var uledevPath = path.normalize(path.join(__dirname, '../lib/uledev'));
 	var uledev = require(uledevPath);
 	uledev.launch();
 }
 
-/* 初始化ULE开发环境 */
-function init(){
-	//initLaunchFile();
-	initConfig();
-	initDirectory();
-	console.info('[OK] 初始化完成!');
-}
-
 /* 初始化启动文件 */
 function initLaunchFile(){
 	var fileName = 'uledev-server';
-	var filePath = path.normalize(path.join(__cmdPath, fileName));
+	var filePath = path.normalize(path.join(__cmdname, fileName));
 	var exists = fs.existsSync(filePath);
 	if(exists) return;
 
@@ -88,7 +98,7 @@ function initLaunchFile(){
 function initConfig(){
 	var fileName = 'uledev.json';
 	var sourcePath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
-	var targetPath = path.normalize(path.join(__cmdPath, fileName));
+	var targetPath = path.normalize(path.join(__cmdname, fileName));
 	var exists = fs.existsSync(targetPath);
 	if(exists) return;
 
@@ -106,7 +116,7 @@ function initDirectory(){
 
 function mkdirs(){
 	var list = Array.prototype.slice.apply(arguments);
-	var dirPath = __cmdPath;
+	var dirPath = __cmdname;
 	while(list.length){
 		var name = list.shift();
 		dirPath = path.normalize(path.join(dirPath, name));
@@ -116,3 +126,5 @@ function mkdirs(){
 		console.info('[OK] 创建目录: ', name);
 	}
 }
+
+init();
