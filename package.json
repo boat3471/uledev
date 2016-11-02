@@ -1,6 +1,6 @@
 {
 	"name": "uledev",
-	"version": "1.0.17",
+	"version": "1.0.18",
 	"description": "用于构建邮乐前端个人开发环境",
 	"main": "./lib/uledev",
 	"author": "xinwenchao",

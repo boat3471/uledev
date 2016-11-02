@@ -34,4 +34,6 @@
 - **`uledev -v`** 查看版本号
 - **`uledev -h`** 查看命令
 - **`uledev`** 输出简介
-- **`uledev event eventname 20161028`** 创建活动模版, 自动生成html, css, js, 自动处理页头页脚, 自动发布生产文件, 创建完成后个人只需修改banner, 背景, 微调商品列表样式和导航条
+- **`uledev event`** 创建活动模版, 自动生成html, css, js, 自动处理页头页脚, 自动发布生产文件, 创建完成后个人只需修改banner, 背景, 微调商品列表样式和导航条
+- **`uledev event -copy`** 复制活动
+- **`uledev event -del`** 删除活动
