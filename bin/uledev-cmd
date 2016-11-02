@@ -42,10 +42,13 @@ function init(){
 			case '-help':
 				console.error([''
 					, '  uledev 命令:'
-					, '    -h, --help              显示帮助信息'
-					, '    -v, --version           显示版本号'
-					, '    -s, start               运行ULE开发环境'
-					, '    init                    初始化ULE开发环境'
+					, '    -h, --help               显示帮助信息'
+					, '    -v, --version            显示版本号'
+					, '    -s, start                运行ULE开发环境'
+					, '    init                     初始化ULE开发环境'
+					, '    event                    创建一个活动'
+					, '    event -copy              复制一个活动'
+					, '    event -del               删除一个活动'
 					, ''
 				].join('\n'));
 				break;
@@ -56,13 +59,16 @@ function init(){
 			case 'init':
 			case '-s':
 			case 'start':
-				if(!initfinished) {
+				if(!initfinished){
 					//initLaunchFile();
 					initConfig();
 					initDirectory();
 					console.info('[OK] 初始化完成!');
 				}
 				start();
+				break;
+			case 'event':
+				handlerEvent(args.shift());
 				break;
 			default:
 				console.info('无效命令, 请执行 uledev -h/--help 查询命令');
@@ -125,6 +131,11 @@ function mkdirs(){
 		fs.mkdirSync(dirPath);
 		console.info('[OK] 创建目录: ', name);
 	}
+}
+
+function handlerEvent(cmd){
+	var event = require('../lib/ule-modules/ule-event');
+	event(cmd);
 }
 
 init();
