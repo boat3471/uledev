@@ -15,8 +15,8 @@
 		"morgan": "~1.7.0",
 		"serve-favicon": "~2.3.0",
 		"stylus": "0.54.5",
-		"extend": "3.0.0",
-		"ftp": "0.3.10",
+		"extend": "",
+		"ftp": "",
 		"moment": "",
 		"read": ""
 	},
