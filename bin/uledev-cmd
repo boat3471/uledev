@@ -45,10 +45,12 @@ function init(){
 					, '    -h, --help               显示帮助信息'
 					, '    -v, --version            显示版本号'
 					, '    -s, start                运行ULE开发环境'
-					, '    init                     初始化ULE开发环境'
 					, '    event                    创建一个活动'
 					, '    event -copy              复制一个活动'
 					, '    event -del               删除一个活动'
+					, '    base64                   转换图片的base64码'
+					, '    load                     下载文件'
+					, '    load -css                加载css图片'
 					, ''
 				].join('\n'));
 				break;
@@ -56,7 +58,6 @@ function init(){
 			case '--version':
 				console.info(__ule.name, __ule.version);
 				break;
-			case 'init':
 			case '-s':
 			case 'start':
 				if(!initfinished){
@@ -71,7 +72,7 @@ function init(){
 				handlerEvent(args.shift());
 				break;
 			default:
-				console.info('无效命令, 请执行 uledev -h/--help 查询命令');
+				console.info('无效命令, 请执行 uledev -h 查询相关命令');
 				break;
 		}
 	}
