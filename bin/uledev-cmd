@@ -1,142 +1,86 @@
 #!/usr/bin/env node
+
+var _args = process.argv.slice(2)
+	, _arg
+	, _handle
+	, _helpInfo = ''
+	, _ule = null;
+
+if(!_args.length){
+	console.info('\r\n  简单就是终极的复杂 · 达芬奇');
+	return;
+}
+
 var fs = require('fs');
 var path = require('path');
 var extend = require('extend');
-var __cmdname = process.cwd();
-var __ule = {
+var _cmdname = process.cwd();
+
+while(_args.length){
+	_arg = _args.shift();
+	switch(_arg){
+		case '-h':
+		case '-help':
+			console.info(_helpInfo);
+			break;
+		case '-v':
+		case '--version':
+			console.info(_ule.name, _ule.version);
+			break;
+		case '-s':
+		case 'start':
+			_handle = require('../lib/ule-modules/cmd/ule-cmd-start');
+			_handle();
+			break;
+		case 'event':
+			_handle = require('../lib/ule-modules/ule-event');
+			_handle(_args.shift());
+			break;
+		case 'base64':
+			_handle = require('../lib/ule-modules/ule-base64');
+			_handle();
+			break;
+		case 'load':
+
+			break;
+		default:
+			console.info('\r\n  无效命令, 请执行 uledev -h 查询相关命令');
+			return;
+	}
+}
+
+_helpInfo = [''
+	, '  uledev 命令:'
+	, '    -h, --help               显示帮助信息'
+	, '    -v, --version            显示版本号'
+	, '    -s, start                运行ULE开发环境'
+	, '    event                    创建一个活动'
+	, '    event -copy              复制一个活动'
+	, '    event -del               删除一个活动'
+	, '    base64                   转换图片的base64码'
+	, '    load                     下载文件'
+	, '    load -css                加载css图片'
+	, ''
+].join('\n');
+
+_ule = {
 	name: '',
 	version: '',
 	description: '',
 	author: '',
-	cmd: __cmdname,
+	cmd: _cmdname,
 	hostsPath: '',
 	hosts: [],
-	path: {
-		packageJson: path.normalize(path.join(__dirname, '../package.json')),
-		defaultJson: path.normalize(path.join(__dirname, '../lib/uledev.json')),
-		ownJson: path.normalize(path.join(__cmdname, 'uledev.json'))
-	}
+	packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
+	defaultJsonPath: path.normalize(path.join(__dirname, '../lib/uledev.json')),
+	ownJsonPath: path.normalize(path.join(_cmdname, 'uledev.json'))
 };
-var initfinished = fs.existsSync(__ule.path.ownJson);
-/* 初始化ULE开发环境 */
-function init(){
-	var args = process.argv.slice(2), arg;
-	var packageData = require(__ule.path.packageJson);
-	var configData = initfinished ? require(__ule.path.ownJson) : require(__ule.path.defaultJson);
 
-	__ule.name = (packageData && packageData.name);
-	__ule.version = (packageData && packageData.version);
-	__ule.description = (packageData && packageData.description);
-	__ule.author = (packageData && packageData.author);
+var packageData = require(_ule.packageJsonPath);
+var configData = fs.existsSync(_ule.ownJsonPath) ? require(_ule.ownJsonPath) : require(_ule.defaultJsonPath);
 
-	extend(__ule, configData);
-	global.__cmdname = __cmdname;
-	global.ule = __ule;
+extend(_ule, packageData);
+extend(_ule, configData);
 
-	if(args.length == 0) console.info(__ule.description);
-
-	while(args.length){
-		arg = args.shift();
-		switch(arg){
-			case '-h':
-			case '-help':
-				console.error([''
-					, '  uledev 命令:'
-					, '    -h, --help               显示帮助信息'
-					, '    -v, --version            显示版本号'
-					, '    -s, start                运行ULE开发环境'
-					, '    event                    创建一个活动'
-					, '    event -copy              复制一个活动'
-					, '    event -del               删除一个活动'
-					, '    base64                   转换图片的base64码'
-					, '    load                     下载文件'
-					, '    load -css                加载css图片'
-					, ''
-				].join('\n'));
-				break;
-			case '-v':
-			case '--version':
-				console.info(__ule.name, __ule.version);
-				break;
-			case '-s':
-			case 'start':
-				if(!initfinished){
-					//initLaunchFile();
-					initConfig();
-					initDirectory();
-					console.info('[OK] 初始化完成!');
-				}
-				start();
-				break;
-			case 'event':
-				handlerEvent(args.shift());
-				break;
-			default:
-				console.info('无效命令, 请执行 uledev -h 查询相关命令');
-				break;
-		}
-	}
-}
-
-/* 开启ULEDEV */
-function start(){
-	var uledevPath = path.normalize(path.join(__dirname, '../lib/uledev'));
-	var uledev = require(uledevPath);
-	uledev.launch();
-}
-
-/* 初始化启动文件 */
-function initLaunchFile(){
-	var fileName = 'uledev-server';
-	var filePath = path.normalize(path.join(__cmdname, fileName));
-	var exists = fs.existsSync(filePath);
-	if(exists) return;
-
-	var content = [
-		'#!/usr/bin/env node',
-		'var uledev = require("uledev");',
-		'uledev.launch();'
-	].join('\n');
-	fs.writeFileSync(filePath, content);
-	console.info('[OK] 创建启动文件: ', fileName);
-}
-
-/* 初始化配置文件 */
-function initConfig(){
-	var fileName = 'uledev.json';
-	var sourcePath = path.normalize(path.join(__dirname, '../lib/uledev.json'));
-	var targetPath = path.normalize(path.join(__cmdname, fileName));
-	var exists = fs.existsSync(targetPath);
-	if(exists) return;
-
-	var sourceData = require(sourcePath);
-	var targetContent = JSON.stringify(sourceData, null, 4);
-	fs.writeFileSync(targetPath, targetContent);
-	console.info('[OK] 创建配置文件: ', fileName);
-}
-
-/* 初始化目录结构 */
-function initDirectory(){
-	mkdirs('wwwroot');
-	mkdirs('webroot');
-}
-
-function mkdirs(){
-	var list = Array.prototype.slice.apply(arguments);
-	var dirPath = __cmdname;
-	while(list.length){
-		var name = list.shift();
-		dirPath = path.normalize(path.join(dirPath, name));
-		var exists = fs.existsSync(dirPath);
-		if(exists) continue;
-		fs.mkdirSync(dirPath);
-		console.info('[OK] 创建目录: ', name);
-	}
-}
-
-function handlerEvent(cmd){
-	var event = require('../lib/ule-modules/ule-event');
-	event(cmd);
-}
-
-init();
+global.__cmdname = _cmdname;
+global.ule = _ule;
