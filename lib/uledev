@@ -2,13 +2,10 @@
 /* ule前端项目开发启动器 */
 require('./ule-modules/console');
 require('./ule-modules/init');
-module.exports = {
-	launch: function(){
-		var app = require('./ule-modules/web/app');
-
-		require('./ule-modules/hosts')(function(){
-			app.init();
-		});
-	}
+var app = require('./ule-modules/web/app');
+module.exports = function(){
+	require('./ule-modules/hosts')(function(){
+		app();
+	});
 };
 
