@@ -4,15 +4,18 @@ require('./ule-modules/console');
 require('./ule-modules/init');
 module.exports = {
 	launch: function(){
-		var app = require('./ule-modules/main');
 		var http = require('http');
-		var port = normalizePort(process.env.PORT || ule.port);
-		app.set('port', port);
+		var server = http.createServer(ule.app);
 
-		var server = http.createServer(app);
-		server.listen(port);
-		server.on('error', onError);
-		server.on('listening', onListening);
+		require('./ule-modules/hosts')(function(){
+			var port = normalizePort(process.env.PORT || ule.port);
+			var app = require('./ule-modules/main');
+
+			app(port);
+			server.listen(port);
+			server.on('error', onError);
+			server.on('listening', onListening);
+		});
 
 		function onError(error){
 			if(error.syscall !== 'listen')

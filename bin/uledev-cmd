@@ -3,8 +3,7 @@
 var _args = process.argv.slice(2)
 	, _arg
 	, _handle
-	, _helpInfo = ''
-	, _ule = null;
+	, _helpInfo = '';
 
 if(!_args.length){
 	console.info('\r\n  简单就是终极的复杂 · 达芬奇');
@@ -14,7 +13,28 @@ if(!_args.length){
 var fs = require('fs');
 var path = require('path');
 var extend = require('extend');
-var _cmdname = process.cwd();
+
+var _cmdPath = global.__cmdPath = process.cwd();
+var _ule = {
+	name: '',
+	version: '',
+	description: '',
+	author: '',
+	cmd: _cmdPath,
+	hostsPath: '',
+	hosts: [],
+	packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
+	defaultJsonPath: path.normalize(path.join(__dirname, '../lib/uledev.json')),
+	ownJsonPath: path.normalize(path.join(_cmdPath, 'uledev.json'))
+};
+
+var packageData = require(_ule.packageJsonPath);
+var configData = fs.existsSync(_ule.ownJsonPath) ? require(_ule.ownJsonPath) : require(_ule.defaultJsonPath);
+
+extend(_ule, packageData);
+extend(_ule, configData);
+
+global.ule = _ule;
 
 while(_args.length){
 	_arg = _args.shift();
@@ -62,25 +82,3 @@ _helpInfo = [''
 	, '    load -css                加载css图片'
 	, ''
 ].join('\n');
-
-_ule = {
-	name: '',
-	version: '',
-	description: '',
-	author: '',
-	cmd: _cmdname,
-	hostsPath: '',
-	hosts: [],
-	packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
-	defaultJsonPath: path.normalize(path.join(__dirname, '../lib/uledev.json')),
-	ownJsonPath: path.normalize(path.join(_cmdname, 'uledev.json'))
-};
-
-var packageData = require(_ule.packageJsonPath);
-var configData = fs.existsSync(_ule.ownJsonPath) ? require(_ule.ownJsonPath) : require(_ule.defaultJsonPath);
-
-extend(_ule, packageData);
-extend(_ule, configData);
-
-global.__cmdname = _cmdname;
-global.ule = _ule;
