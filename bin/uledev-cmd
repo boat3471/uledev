@@ -3,7 +3,8 @@
 var _args = process.argv.slice(2)
 	, _arg
 	, _handle
-	, _helpInfo = '';
+	, _helpInfo = ''
+	, _ule;
 
 if(!_args.length){
 	console.info('\r\n  简单就是终极的复杂 · 达芬奇');
@@ -15,26 +16,6 @@ var path = require('path');
 var extend = require('extend');
 
 var _cmdPath = global.__cmdPath = process.cwd();
-var _ule = {
-	name: '',
-	version: '',
-	description: '',
-	author: '',
-	cmd: _cmdPath,
-	hostsPath: '',
-	hosts: [],
-	packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
-	defaultJsonPath: path.normalize(path.join(__dirname, '../lib/uledev.json')),
-	ownJsonPath: path.normalize(path.join(_cmdPath, 'uledev.json'))
-};
-
-var packageData = require(_ule.packageJsonPath);
-var configData = fs.existsSync(_ule.ownJsonPath) ? require(_ule.ownJsonPath) : require(_ule.defaultJsonPath);
-
-extend(_ule, packageData);
-extend(_ule, configData);
-
-global.ule = _ule;
 
 while(_args.length){
 	_arg = _args.shift();
@@ -45,23 +26,29 @@ while(_args.length){
 			break;
 		case '-v':
 		case '--version':
+			_initDate();
 			console.info(_ule.name, _ule.version);
 			break;
 		case '-s':
 		case 'start':
-			_handle = require('../lib/ule-modules/cmd/ule-cmd-start');
+			_initDate();
+			_handle = require('../lib/ule-modules/cmd/ule-start');
 			_handle();
 			break;
 		case 'event':
-			_handle = require('../lib/ule-modules/ule-event');
+			_initDate();
+			_handle = require('../lib/ule-modules/cmd/ule-event');
 			_handle(_args.shift());
 			break;
 		case 'base64':
-			_handle = require('../lib/ule-modules/ule-base64');
+			_initDate();
+			_handle = require('../lib/ule-modules/cmd/ule-base64');
 			_handle();
 			break;
 		case 'load':
-
+			_initDate();
+			_handle = require('../lib/ule-modules/cmd/ule-load');
+			_handle();
 			break;
 		default:
 			console.info('\r\n  无效命令, 请执行 uledev -h 查询相关命令');
@@ -82,3 +69,26 @@ _helpInfo = [''
 	, '    load -css                加载css图片'
 	, ''
 ].join('\n');
+
+function _initDate(){
+	_ule = {
+		name: '',
+		version: '',
+		description: '',
+		author: '',
+		cmd: _cmdPath,
+		hostsPath: '',
+		hosts: [],
+		packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
+		defaultJsonPath: path.normalize(path.join(__dirname, '../lib/uledev.json')),
+		ownJsonPath: path.normalize(path.join(_cmdPath, 'uledev.json'))
+	};
+
+	var packageData = require(_ule.packageJsonPath);
+	var configData = fs.existsSync(_ule.ownJsonPath) ? require(_ule.ownJsonPath) : require(_ule.defaultJsonPath);
+
+	extend(_ule, packageData);
+	extend(_ule, configData);
+
+	global.ule = _ule;
+}
