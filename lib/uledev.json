@@ -15,5 +15,9 @@
 			"user": "",
 			"pwd": ""
 		}
+	},
+	"css-compile": {
+		"compiler": "less/sass/stylus",
+		"compress": true
 	}
 }

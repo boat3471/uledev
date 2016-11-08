@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
+killProcess();
+
 var _args = process.argv.slice(2)
-	, _arg
-	, _handle
+	, _arg = ''
+	, _handle = null
 	, _helpInfo = ''
-	, _ule;
+	, _ule = {};
 
 if(!_args.length){
 	console.info('\r\n  简单就是终极的复杂 · 达芬奇');
@@ -91,4 +93,14 @@ function _initDate(){
 	extend(_ule, configData);
 
 	global.ule = _ule;
+}
+
+function killProcess(){
+	var exec = require('child_process').exec;
+	var fs = require('fs');
+	var oldPid = require('./pid.json').pid;
+	fs.writeFileSync('./pid.json', JSON.stringify({
+		pid: process.pid
+	}, null, 4));
+	if(oldPid > 0) exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
 }

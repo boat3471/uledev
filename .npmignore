@@ -2,7 +2,7 @@ node_modules
 wwwroot
 webroot
 webroot-src
-launcher
+uledev.cmd
 .npmignore
 .gitignore
 .git
