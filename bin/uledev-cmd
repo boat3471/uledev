@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-killProcess();
-
 var _args = process.argv.slice(2)
 	, _arg = ''
 	, _handle = null
@@ -33,6 +31,7 @@ while(_args.length){
 			break;
 		case '-s':
 		case 'start':
+			_killProcess();
 			_initDate();
 			_handle = require('../lib/ule-modules/cmd/ule-start');
 			_handle();
@@ -95,12 +94,16 @@ function _initDate(){
 	global.ule = _ule;
 }
 
-function killProcess(){
+function _killProcess(){
+	var pidPath = './pid.json';
 	var exec = require('child_process').exec;
 	var fs = require('fs');
-	var oldPid = require('./pid.json').pid;
-	fs.writeFileSync('./pid.json', JSON.stringify({
+	var oldPid = 0;
+	var exists = fs.existsSync(pidPath);
+	if(exists) oldPid = require(pidPath).pid;
+	fs.writeFileSync(pidPath, JSON.stringify({
 		pid: process.pid
 	}, null, 4));
-	if(oldPid > 0) exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
+	if(oldPid > 0)
+		exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
 }

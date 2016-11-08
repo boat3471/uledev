@@ -3,6 +3,7 @@ wwwroot
 webroot
 webroot-src
 uledev.cmd
+pid.json
 .npmignore
 .gitignore
 .git
