@@ -3,5 +3,6 @@
 /bin/wwwroot
 /bin/webroot
 /bin/webroot-src
+/bin/pid.json
 uledev.cmd
-pid.json
+
