@@ -1,44 +1,44 @@
 {
 	"101": {
 		"description": "推荐位活动",
+		"img": "i/event/{yyyy}/{mmdd}/{name}/",
 		"css": "c/event/{yyyy}/{mmdd}/{name}.css",
 		"js": "j/event/{yyyy}/{mmdd}/{name}.js",
-		"html": "event/{yyyy}/{mmdd}/{name}.html",
-		"img": "i/event/{yyyy}/{mmdd}/{name}/"
+		"html": "event/{yyyy}/{mmdd}/{name}.html"
 	},
 	"102": {
 		"description": "秒杀活动",
+		"img": "",
 		"css": "",
 		"js": "",
-		"html": "",
-		"img": ""
+		"html": ""
 	},
 	"103": {
 		"description": "抽奖活动",
+		"img": "",
 		"css": "",
 		"js": "",
-		"html": "",
-		"img": ""
+		"html": ""
 	},
 	"104": {
 		"description": "卡券活动",
+		"img": "",
 		"css": "",
 		"js": "",
-		"html": "",
-		"img": ""
+		"html": ""
 	},
 	"201": {
 		"description": "手机推荐位活动",
+		"img": "",
 		"css": "",
 		"js": "",
-		"html": "",
-		"img": ""
+		"html": ""
 	},
 	"202": {
 		"description": "手机秒杀活动",
+		"img": "",
 		"css": "",
 		"js": "",
-		"html": "",
-		"img": ""
+		"html": ""
 	}
 }
