@@ -81,7 +81,7 @@ function _initDate(){
 		hostsPath: '',
 		hosts: [],
 		packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
-		defaultJsonPath: path.normalize(path.join(__dirname, '../lib/uledev.json')),
+		defaultJsonPath: path.normalize(path.join(__dirname, '../lib/default-uledev.json')),
 		ownJsonPath: path.normalize(path.join(_cmdPath, 'uledev.json'))
 	};
 
@@ -106,4 +106,5 @@ function _killProcess(){
 	}, null, 4));
 	if(oldPid > 0)
 		exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
+	console.info('[ULE] 启动进程: ', process.pid);
 }

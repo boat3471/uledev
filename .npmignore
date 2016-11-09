@@ -1,11 +1,11 @@
 node_modules
-wwwroot
-webroot
-webroot-src
-uledev.cmd
-pid.json
+bin/wwwroot
+bin/webroot
+bin/webroot-src
+bin/uledev.cmd
+bin/pid.json
+bin/uledev-event.json
 .npmignore
 .gitignore
-.git
 .idea
 .dev

@@ -1,8 +1,10 @@
-/node_modules
-/bin/uledev.json
-/bin/wwwroot
-/bin/webroot
-/bin/webroot-src
-/bin/pid.json
-uledev.cmd
+node_modules
+bin/wwwroot
+bin/webroot
+bin/webroot-src
+bin/uledev.json
+bin/uledev.cmd
+bin/pid.json
+bin/uledev-event.json
+.idea/
 
