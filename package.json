@@ -2,10 +2,9 @@
 	"name": "uledev",
 	"version": "1.0.19",
 	"description": "用于构建邮乐前端个人开发环境",
-	"main": "./lib/uledev",
 	"author": "xinwenchao",
 	"license": "ISC",
-	"bin": "./bin/uledev-cmd",
+	"bin": "uledev-cmd",
 	"dependencies": {
 		"express": "~4.13.4",
 		"body-parser": "~1.15.1",
@@ -30,7 +29,7 @@
 		"gulp-sftp": ""
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"install": "node ule-modules/ule-install.js"
 	},
 	"repository": {
 		"type": "git",

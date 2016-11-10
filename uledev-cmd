@@ -48,22 +48,22 @@ while(_args.length){
 		case 'start':
 			_killProcess();
 			_initDate();
-			_handle = require('../ule-modules/cmd/ule-start');
+			_handle = require('../ule-modules/ule-start');
 			_handle();
 			break;
 		case 'event':
 			_initDate();
-			_handle = require('../ule-modules/cmd/ule-event');
+			_handle = require('../ule-modules/ule-event');
 			_handle(_args.shift());
 			break;
 		case 'base64':
 			_initDate();
-			_handle = require('../ule-modules/cmd/ule-base64');
+			_handle = require('../ule-modules/ule-base64');
 			_handle();
 			break;
 		case 'load':
 			_initDate();
-			_handle = require('../ule-modules/cmd/ule-load');
+			_handle = require('../ule-modules/ule-load');
 			_handle();
 			break;
 		default:

@@ -1,0 +1,1 @@
+console.info('安装成功！');
