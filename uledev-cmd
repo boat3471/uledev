@@ -13,7 +13,7 @@ var _username = process.env.username;
 var _cmdPath = process.cwd();
 
 /* ↓↓↓ 初始化 uledev 模块信息 ↓↓↓ */
-var _info = require('../package.json');
+var _info = require('./package.json');
 var _name = _info.name;
 var _version = _info.version;
 
@@ -34,7 +34,7 @@ while(_args.length){
 	switch(_arg){
 		case '-h':
 		case 'help':
-			var cmdList = require('../ule-conf/help-command.json');
+			var cmdList = require('./ule-conf/help-command.json');
 			console.info('');
 			console.info(cmdList.join('\n'));
 			console.info('');
@@ -48,22 +48,22 @@ while(_args.length){
 		case 'start':
 			_killProcess();
 			_initDate();
-			_handle = require('../ule-modules/ule-start');
+			_handle = require('./ule-modules/ule-start');
 			_handle();
 			break;
 		case 'event':
 			_initDate();
-			_handle = require('../ule-modules/ule-event');
+			_handle = require('./ule-modules/ule-event');
 			_handle(_args.shift());
 			break;
 		case 'base64':
 			_initDate();
-			_handle = require('../ule-modules/ule-base64');
+			_handle = require('./ule-modules/ule-base64');
 			_handle();
 			break;
 		case 'load':
 			_initDate();
-			_handle = require('../ule-modules/ule-load');
+			_handle = require('./ule-modules/ule-load');
 			_handle();
 			break;
 		default:
