@@ -50,7 +50,7 @@
 		"serve-favicon": "用于网页图标中间件",
 		"stylus": "CSS的预处理框架",
 		"extend": "实现jQuery中的extend",
-		"multer": "文件上传",
+		"formidable": "文件上传",
 		"minify": "CSS和JS压缩和削减, 文件合并",
 		"gulp": "是一个自动化构建工具",
 		"gulp-sass": "CSS的预处理框架",
