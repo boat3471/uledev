@@ -6,27 +6,14 @@
 	"license": "ISC",
 	"bin": "uledev-cmd",
 	"dependencies": {
-		"express": "~4.13.4",
-		"body-parser": "~1.15.1",
-		"cookie-parser": "~1.4.3",
-		"serve-favicon": "~2.3.0",
-		"morgan": "~1.7.0",
-		"debug": "~2.2.0",
-		"ejs": "~2.4.1",
+		"express": "4.14.0",
+		"body-parser": "1.15.2",
+		"morgan": "1.7.0",
+		"debug": "2.3.2",
+		"ejs": "2.5.2",
 		"extend": "3.0.0",
-		"moment": "2.15.2",
-		"read": "1.0.7",
-		"formidable": "1.0.17",
-		"glup": "1.0.14",
-		"gulp-copy": "",
-		"gulp-rename": "",
-		"gulp-sass": "2.3.2",
-		"gulp-less": "3.2.0",
-		"gulp-stylus": "2.6.0",
-		"gulp-sourcemaps": "2.2.0",
-		"gulp-autoprefixer": "3.1.1",
-		"gulp-imagemin": "",
-		"gulp-sftp": ""
+		"moment": "2.16.0",
+		"read": "1.0.7"
 	},
 	"scripts": {
 		"install": "node ule-modules/ule-install.js"
@@ -39,6 +26,23 @@
 		"url": "https://github.com/boat3471/uledev/issues"
 	},
 	"homepage": "https://github.com/boat3471/uledev#readme",
+	"maybeDescription": {
+		"cookie-parser": "1.4.3",
+		"serve-favicon": "2.3.0",
+		"formidable": "1.0.17",
+		"glup": "1.0.14",
+		"gulp-copy": "0.0.2",
+		"gulp-rename": "1.2.2",
+		"gulp-sass": "2.3.2",
+		"gulp-less": "3.2.0",
+		"gulp-stylus": "2.6.0",
+		"gulp-sourcemaps": "2.2.0",
+		"gulp-autoprefixer": "3.1.1",
+		"gulp-imagemin": "3.1.1",
+		"gulp-ssh": "0.6.0",
+		"gulp-ftp": "1.1.0",
+		"gulp-sftp": "0.1.5"
+	},
 	"dependencyDescription": {
 		"body-parser": "用于解析客户端请求的body中的内容, 处理json, post等数据",
 		"cookie-parser": "用于获取web浏览器发送的cookie中的内容",
