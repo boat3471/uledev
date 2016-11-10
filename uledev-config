@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var configData = require('./ule-conf/ule-config.json');
+var packageData = require('./package.json');
+var uledevData = require('./ule-conf/default-uledev.json');
+
+function updateJsonFile(){
+	fs.writeFileSync(__dirname + '/ule-conf/ule-config.json', JSON.stringify(configData, null, 4));
+}
+
+module.exports = {
+	name: packageData.name,
+	version: packageData.version,
+	pid: configData.pid,
+	modluePath: configData.modulePath,
+	devPath: configData.devPath,
+	username: configData.username,
+	installed: function(){
+		configData.username = process.env.username;
+		configData.modulePath = __dirname;
+		updateJsonFile();
+		console.info('uledev 安装成功！\n\n');
+	},
+	updatePid: function(value){
+		configData.pid = value;
+		updateJsonFile();
+	},
+	getUledevData: function(){
+		log(configData);
+		return uledevData;
+	}
+};

@@ -2,12 +2,14 @@
  * Created by xinwenchao on 2016/11/4.
  * 启动开发环境
  */
+require('./base/console');
 
 var path = require('path');
 var fs = require('fs');
 var mkdirs = require('./base/mkdirs');
+var config = require('../uledev-config');
 
-var _defaultUledevJson = require('../ule-conf/default-uledev.json');
+var _uledevJson = config.getUledevData();
 var _ownPath = '';
 
 /* 初始化启动文件 */
@@ -27,8 +29,9 @@ function initConfig(){
 	var targetPath = path.normalize(path.join(_ownPath, fileName));
 	var exists = fs.existsSync(targetPath);
 	if(exists) return;
-	configData.devPath = __cmdPath;
-	var targetContent = JSON.stringify(configData, null, 4);
+	_uledevJson.devPath = _ownPath;
+	_uledevJson.username = config.username;
+	var targetContent = JSON.stringify(_uledevJson, null, 4);
 	fs.writeFileSync(targetPath, targetContent);
 	console.info('[ULE] 创建配置文件: ', fileName);
 }
@@ -42,8 +45,8 @@ function initDirectory(){
 
 /* 开启ULEDEV */
 function start(){
-	var uledevPath = path.normalize(path.join(__dirname, '../../uledev'));
-	require(uledevPath)();
+	require('./base/hosts');
+	require('../ule-server/app');
 }
 
 module.exports = function(ownPath){

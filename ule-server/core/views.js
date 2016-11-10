@@ -1,34 +1,33 @@
-var app = ule.app;
-var express = ule.express;
 var path = require('path');
-var routesPath = path.normalize(path.join(__modulePath, 'lib/ule-routes/index'));
-var viewsPath = path.normalize(path.join(__modulePath, 'lib/ule-views'));
-var ulePublicPath = path.join(__modulePath, 'lib/ule-public');
-var webrootPath = path.join(ule.cmd, 'webroot');
-var wwwrootPath = path.join(ule.cmd, 'wwwroot');
+var config = require('../../uledev-config');
+var routesPath = path.normalize(path.join(config.modluePath, 'lib/ule-routes/index'));
+var viewsPath = path.normalize(path.join(config.modluePath, 'lib/ule-views'));
+var ulePublicPath = path.join(config.modluePath, 'lib/ule-public');
+var webrootPath = path.join(config.devPath, 'webroot');
+var wwwrootPath = path.join(config.devPath, 'wwwroot');
 // 设置视图引擎
 var routes = require(routesPath);
-app.set('views', viewsPath);
-app.set('view engine', 'ejs');
-app.use('/', routes);
+uleApp.set('views', viewsPath);
+uleApp.set('view engine', 'ejs');
+uleApp.use('/', routes);
 
 // 设置静态目录
-app.use('/', express.static(webrootPath));
-app.use('/', express.static(wwwrootPath));
-app.use('/public', express.static(ulePublicPath));
+uleApp.use('/', uleExpress.static(webrootPath));
+uleApp.use('/', uleExpress.static(wwwrootPath));
+uleApp.use('/public', uleExpress.static(ulePublicPath));
 
 log('静态目录: ', webrootPath);
 log('静态目录: ', wwwrootPath);
 
 // 设置404跳转, 如果未被路由中间件找到的路径, 进入这里统一处理为 404
-app.use('/', function(req, res, next){
+uleApp.use('/', function(req, res, next){
 	var err = new Error('Not Found');
 	err.status = 404;
 	next(err);
 });
 // 开发环境下, 404页面打印详细信息
-if(app.get('env') === 'development'){
-	app.use('/', function(err, req, res, next){
+if(uleApp.get('env') === 'development'){
+	uleApp.use('/', function(err, req, res, next){
 		res.status(err.status || 500);
 		res.render('error', {
 			message: err.message,
@@ -37,7 +36,7 @@ if(app.get('env') === 'development'){
 	});
 }
 // 非开发环境下, 404页面不打印详细信息
-app.use('/', function(err, req, res, next){
+uleApp.use('/', function(err, req, res, next){
 	res.status(err.status || 500);
 	res.render('error', {
 		message: err.message,

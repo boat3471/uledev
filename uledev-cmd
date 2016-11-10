@@ -12,22 +12,9 @@ var extend = require('extend');
 var _username = process.env.username;
 var _cmdPath = process.cwd();
 
-/* ↓↓↓ 初始化 uledev 模块信息 ↓↓↓ */
-var _info = require('./package.json');
-var _name = _info.name;
-var _version = _info.version;
-
-
-// var uledevName = packageInfo.name;
-// var uledevName = packageInfo.name;
-// var uledevName = packageInfo.name;
-// var uledevName = packageInfo.name;
-
-// console.info(_username);
-
-var _arg = ''
-	, _handle = null
-	, _ule = {};
+/* ↓↓↓ uledev 配置信息 ↓↓↓ */
+var _config = require('./uledev-config');
+var _arg = '', _handle = null;
 
 while(_args.length){
 	_arg = _args.shift();
@@ -41,15 +28,14 @@ while(_args.length){
 			break;
 		case '-v':
 		case 'version':
-			_initDate();
-			console.info(_name, _version);
+			console.info(_config.name, _config.version);
 			break;
 		case '-s':
 		case 'start':
 			_killProcess();
 			_initDate();
 			_handle = require('./ule-modules/ule-start');
-			_handle();
+			_handle(_cmdPath);
 			break;
 		case 'event':
 			_initDate();
@@ -73,41 +59,15 @@ while(_args.length){
 }
 
 function _initDate(){
-	_ule = {
-		name: '',
-		version: '',
-		description: '',
-		author: '',
-		cmd: _cmdPath,
-		hostsPath: '',
-		hosts: [],
-		packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
-		uledevJsonPath: path.normalize(path.join(__dirname, '../lib/default-uledev.json')),
-		uledevJsonOwnPath: path.normalize(path.join(_cmdPath, 'uledev.json')),
-		uledevEventJsonPath: path.normalize(path.join(__dirname, '../lib/default-uledev-event.json')),
-		uledevEventJsonOwnPath: path.normalize(path.join(_cmdPath, 'uledev-event.json'))
-	};
 
-	var packageData = require(_ule.packageJsonPath);
-	var configData = fs.existsSync(_ule.uledevJsonOwnPath) ? require(_ule.uledevJsonOwnPath) : require(_ule.uledevJsonPath);
-
-	extend(_ule, packageData);
-	extend(_ule, configData);
-
-	global.ule = _ule;
 }
 
 function _killProcess(){
-	var pidPath = './pid.json';
 	var exec = require('child_process').exec;
-	var fs = require('fs');
-	var oldPid = 0;
-	var exists = fs.existsSync(pidPath);
-	if(exists) oldPid = require(pidPath).pid;
-	fs.writeFileSync(pidPath, JSON.stringify({
-		pid: process.pid
-	}, null, 4));
+	var oldPid = parseInt(_config.pid || 0);
+	var newPid = process.pid;
 	if(oldPid > 0)
 		exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
-	console.info('[ULE] 启动进程: ', process.pid);
+	_config.updatePid(newPid);
+	console.info('[ULE] 启动进程: ', newPid);
 }

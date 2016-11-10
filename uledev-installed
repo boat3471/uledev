@@ -1,11 +1,5 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var defaultUledevJsonPath = './ule-conf/default-uledev.json';
-var defaultUledevJson = require(defaultUledevJsonPath);
+var config = require('./uledev-config');
 
-defaultUledevJson.username = process.env.username;
-
-fs.writeFileSync(defaultUledevJsonPath, JSON.stringify(defaultUledevJson, null, 4));
-
-console.info('安装成功！\n\n');
+config.installed();

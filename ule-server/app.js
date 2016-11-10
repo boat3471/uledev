@@ -1,8 +1,11 @@
-var express = ule.express = require('express');
-var expressApp = ule.app = express();
+var config = require('../uledev-config');
+var uleData = config.getUledevData();
+log(uleData);
+var express = global.uleExpress = require('express');
+var expressApp = global.uleApp = express();
 var http = require('http');
 var server = http.createServer(expressApp);
-var port = normalizePort(process.env.PORT || ule.port);
+var port = normalizePort(process.env.PORT || uleData.port);
 
 function onError(error){
 	if(error.syscall !== 'listen')
@@ -44,9 +47,9 @@ function normalizePort(val){
 module.exports = function(){
 	// require('./favicon');
 	// require('./logger');
-	require('./parser');
-	require('./cookie');
-	require('./views');
+	// require('./core/parser');
+	// require('./core/cookie');
+	require('./core/views');
 
 	expressApp.set('port', port);
 	server.listen(port);
