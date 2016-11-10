@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /* ule前端项目开发启动器 */
-require('./ule-modules/console');
-require('./ule-modules/init');
-var app = require('./ule-modules/web/app');
+require('./console');
+require('./init');
+var app = require('../ule-server/app');
 module.exports = function(){
 	require('./ule-modules/hosts')(function(){
 		app();

@@ -1,10 +1,5 @@
-node_modules
-bin/wwwroot
-bin/webroot
-bin/webroot-src
-bin/uledev.cmd
-bin/pid.json
-bin/uledev-event.json
+/_
+/node_modules
 .npmignore
 .gitignore
 .idea

@@ -1,54 +1,69 @@
 #!/usr/bin/env node
 
-var _args = process.argv.slice(2)
-	, _arg = ''
-	, _handle = null
-	, _helpInfo = ''
-	, _ule = {};
-
-if(!_args.length){
-	console.info('\r\n  简单就是终极的复杂 · 达芬奇');
-	return;
-}
+/* ↓↓↓ 输入参数检查 ↓↓↓ */
+var _args = process.argv.slice(2);
+if(!_args.length) return console.info('\r\n  简单就是终极的复杂 · 达芬奇');
 
 var fs = require('fs');
 var path = require('path');
 var extend = require('extend');
 
-var _cmdPath = global.__cmdPath = process.cwd();
+/* ↓↓↓ 初始化系统信息 ↓↓↓ */
+var _username = process.env.username;
+var _cmdPath = process.cwd();
+
+/* ↓↓↓ 初始化 uledev 模块信息 ↓↓↓ */
+var _info = require('../package.json');
+var _name = _info.name;
+var _version = _info.version;
+
+
+// var uledevName = packageInfo.name;
+// var uledevName = packageInfo.name;
+// var uledevName = packageInfo.name;
+// var uledevName = packageInfo.name;
+
+// console.info(_username);
+
+var _arg = ''
+	, _handle = null
+	, _ule = {};
 
 while(_args.length){
 	_arg = _args.shift();
 	switch(_arg){
 		case '-h':
-		case '-help':
-			console.info(_helpInfo);
+		case 'help':
+			var cmdList = require('../ule-conf/help-command.json');
+			console.info('');
+			console.info(cmdList.join('\n'));
+			console.info('');
 			break;
 		case '-v':
-		case '--version':
+		case 'version':
 			_initDate();
-			console.info(_ule.name, _ule.version);
+			console.info(_name, _version);
 			break;
 		case '-s':
 		case 'start':
 			_killProcess();
 			_initDate();
-			_handle = require('../lib/ule-modules/cmd/ule-start');
+			_handle = require('../ule-modules/cmd/ule-start');
 			_handle();
 			break;
 		case 'event':
 			_initDate();
-			_handle = require('../lib/ule-modules/cmd/ule-event');
+			_handle = require('../ule-modules/cmd/ule-event');
 			_handle(_args.shift());
 			break;
 		case 'base64':
 			_initDate();
-			_handle = require('../lib/ule-modules/cmd/ule-base64');
+			_handle = require('../ule-modules/cmd/ule-base64');
 			_handle();
 			break;
 		case 'load':
 			_initDate();
-			_handle = require('../lib/ule-modules/cmd/ule-load');
+			_handle = require('../ule-modules/cmd/ule-load');
 			_handle();
 			break;
 		default:
@@ -56,20 +71,6 @@ while(_args.length){
 			return;
 	}
 }
-
-_helpInfo = [''
-	, '  uledev 命令:'
-	, '    -h, --help               显示帮助信息'
-	, '    -v, --version            显示版本号'
-	, '    -s, start                运行ULE开发环境'
-	, '    event                    创建一个活动'
-	, '    event -copy              复制一个活动'
-	, '    event -del               删除一个活动'
-	, '    base64                   转换图片的base64码'
-	, '    load                     下载文件'
-	, '    load -css                加载css图片'
-	, ''
-].join('\n');
 
 function _initDate(){
 	_ule = {

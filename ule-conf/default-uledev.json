@@ -1,6 +1,7 @@
 {
+	"username": "",
 	"devPath": "",
-	"author": "",
+	"pid": "",
 	"hostsPath": "C:/WINDOWS/System32/drivers/etc/hosts",
 	"hosts": [
 		"i0.dev.ule.com",

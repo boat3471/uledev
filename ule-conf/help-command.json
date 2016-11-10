@@ -1,0 +1,12 @@
+[
+	"  uledev 命令:\n",
+	"    -h, help         显示帮助信息",
+	"    -v, version      显示版本号",
+	"    -s, start        运行ULE开发环境",
+	"    event            创建一个活动",
+	"    event -copy      复制一个活动",
+	"    event -del       删除一个活动",
+	"    base64           转换图片的base64码",
+	"    load             下载文件",
+	"    load -css        加载css图片"
+]
