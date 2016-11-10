@@ -81,12 +81,14 @@ function _initDate(){
 		hostsPath: '',
 		hosts: [],
 		packageJsonPath: path.normalize(path.join(__dirname, '../package.json')),
-		defaultJsonPath: path.normalize(path.join(__dirname, '../lib/default-uledev.json')),
-		ownJsonPath: path.normalize(path.join(_cmdPath, 'uledev.json'))
+		uledevJsonPath: path.normalize(path.join(__dirname, '../lib/default-uledev.json')),
+		uledevJsonOwnPath: path.normalize(path.join(_cmdPath, 'uledev.json')),
+		uledevEventJsonPath: path.normalize(path.join(__dirname, '../lib/default-uledev-event.json')),
+		uledevEventJsonOwnPath: path.normalize(path.join(_cmdPath, 'uledev-event.json'))
 	};
 
 	var packageData = require(_ule.packageJsonPath);
-	var configData = fs.existsSync(_ule.ownJsonPath) ? require(_ule.ownJsonPath) : require(_ule.defaultJsonPath);
+	var configData = fs.existsSync(_ule.uledevJsonOwnPath) ? require(_ule.uledevJsonOwnPath) : require(_ule.uledevJsonPath);
 
 	extend(_ule, packageData);
 	extend(_ule, configData);
