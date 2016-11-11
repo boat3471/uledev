@@ -3,7 +3,6 @@
  * Created by xinwenchao on 2016/9/7.
  */
 
-var app = ule.app;
 var bodyParser = require('body-parser');
-app.use(bodyParser.json()); //json解析
-app.use(bodyParser.urlencoded({extended: false})); //
+__app.use(bodyParser.json()); //json解析
+__app.use(bodyParser.urlencoded({extended: false})); //

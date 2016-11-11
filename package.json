@@ -16,7 +16,8 @@
 		"ejs": "2.5.2",
 		"extend": "3.0.0",
 		"moment": "2.16.0",
-		"read": "1.0.7"
+		"read": "1.0.7",
+		"formidable": "1.0.17"
 	},
 	"maybeDescription": {
 		"cookie-parser": "1.4.3",

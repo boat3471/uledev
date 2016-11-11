@@ -1,56 +1,47 @@
 #!/usr/bin/env node
 
 /* ↓↓↓ 输入参数检查 ↓↓↓ */
-var _args = process.argv.slice(2);
-if(!_args.length) return console.info('\r\n  简单就是终极的复杂 · 达芬奇');
+var args = process.argv.slice(2);
+if(!args.length) return console.info('\r\n  简单就是终极的复杂 · 达芬奇');
 
 var fs = require('fs');
 var path = require('path');
 var extend = require('extend');
 
-/* ↓↓↓ 初始化系统信息 ↓↓↓ */
-var _username = process.env.username;
-var _cmdPath = process.cwd();
+var arg = '', handle = null;
 
-/* ↓↓↓ uledev 配置信息 ↓↓↓ */
-var _config = require('./uledev-config');
-var _arg = '', _handle = null;
-
-while(_args.length){
-	_arg = _args.shift();
-	switch(_arg){
+while(args.length){
+	arg = args.shift();
+	switch(arg){
 		case '-h':
 		case 'help':
-			var cmdList = require('./ule-conf/help-command.json');
+			var cmdList = require('./cmd.json');
 			console.info('');
 			console.info(cmdList.join('\n'));
 			console.info('');
 			break;
 		case '-v':
 		case 'version':
-			console.info(_config.name, _config.version);
+			var packageJson = require('./package.json');
+			console.info('\n ', packageJson.name, packageJson.version);
 			break;
 		case '-s':
 		case 'start':
-			_killProcess();
-			_initDate();
-			_handle = require('./ule-modules/ule-start');
-			_handle(_cmdPath);
+			killProcess();
+			handle = require('./ule-modules/ule-start');
+			handle();
 			break;
 		case 'event':
-			_initDate();
-			_handle = require('./ule-modules/ule-event');
-			_handle(_args.shift());
+			handle = require('./ule-modules/ule-event');
+			handle(args.shift());
 			break;
 		case 'base64':
-			_initDate();
-			_handle = require('./ule-modules/ule-base64');
-			_handle();
+			handle = require('./ule-modules/ule-base64');
+			handle();
 			break;
 		case 'load':
-			_initDate();
-			_handle = require('./ule-modules/ule-load');
-			_handle();
+			handle = require('./ule-modules/ule-load');
+			handle();
 			break;
 		default:
 			console.info('\r\n  无效命令, 请执行 uledev -h 查询相关命令');
@@ -58,16 +49,12 @@ while(_args.length){
 	}
 }
 
-function _initDate(){
-
-}
-
-function _killProcess(){
+function killProcess(){
 	var exec = require('child_process').exec;
-	var oldPid = parseInt(_config.pid || 0);
+	var oldPid = require('./ule-conf/uledev-pid.json');
 	var newPid = process.pid;
 	if(oldPid > 0)
 		exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
-	_config.updatePid(newPid);
+	fs.writeFileSync(__dirname + '/ule-conf/uledev-pid.json', newPid);
 	console.info('[ULE] 启动进程: ', newPid);
 }

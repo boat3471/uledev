@@ -1,5 +1,3 @@
 #!/usr/bin/env node
 
-var config = require('./uledev-config');
-
-config.installed();
+console.info('  uledev 安装成功！\n\n');

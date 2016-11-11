@@ -1,25 +1,19 @@
+var config = require('../../uledev-config');
 var fs = require('fs');
-var express = require('express');
-var router = express.Router();
+var router = __express.Router();
 var formidable = require('formidable');
 
+var uledevDate = config.getUledevData();
 
 /* GET home page. */
 router.get('/', function(req, res, next){
-	res.render('index', {title: 'ULE Dev'});
+	res.render('index', {username: uledevDate.username, title: 'uledev'});
 });
 
 /* GET event page. */
 router.get('/event', function(req, res, next){
-	var defPath = ule.uledevEventJsonPath;
-	var ownPath = ule.uledevEventJsonOwnPath;
-	var exists = fs.existsSync(ownPath);
-
-	delete require.cache[ownPath];
-
-	var configData = exists ? require(ownPath) : require(defPath);
-
-	res.render('event', {configData: configData});
+	var uledeveEventDate = config.getUledevEventData();
+	res.render('event', {configData: uledeveEventDate});
 });
 
 /* upload. */

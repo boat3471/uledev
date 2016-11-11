@@ -1,11 +1,9 @@
 var config = require('../uledev-config');
-var uleData = config.getUledevData();
-log(uleData);
-var express = global.uleExpress = require('express');
-var expressApp = global.uleApp = express();
+var express = require('express');
+var expressApp = express();
 var http = require('http');
 var server = http.createServer(expressApp);
-var port = normalizePort(process.env.PORT || uleData.port);
+var port = 80;
 
 function onError(error){
 	if(error.syscall !== 'listen')
@@ -45,10 +43,16 @@ function normalizePort(val){
 }
 
 module.exports = function(){
+	var uledevData = config.getUledevData();
+	port = normalizePort(process.env.PORT || uledevData.port);
+	global.__modluePath = uledevData.modulePath;
+	global.__express = express;
+	global.__app = expressApp;
+
 	// require('./favicon');
 	// require('./logger');
-	// require('./core/parser');
 	// require('./core/cookie');
+	require('./core/parser');
 	require('./core/views');
 
 	expressApp.set('port', port);

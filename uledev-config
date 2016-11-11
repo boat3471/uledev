@@ -1,33 +1,65 @@
 #!/usr/bin/env node
 
 var fs = require('fs');
-var configData = require('./ule-conf/ule-config.json');
-var packageData = require('./package.json');
-var uledevData = require('./ule-conf/default-uledev.json');
+var path = require('path');
+var extend = require('extend');
+var moment = require('moment');
 
-function updateJsonFile(){
-	fs.writeFileSync(__dirname + '/ule-conf/ule-config.json', JSON.stringify(configData, null, 4));
+var uledevData = require('./ule-conf/uledev.json');
+var eventData = require('./ule-conf/uledev-event.json');
+
+var _username = process.env.username;
+var _modulePath = __dirname;
+
+/** 初始化默认的 uledev.json */
+function initDefaultUleDevFile(){
+	var jsonPath = __dirname + '/ule-conf/uledev.json';
+	uledevData.username = _username;
+	uledevData.modulePath = _modulePath;
+	writeJsonFile(jsonPath, uledevData);
+}
+
+/** 创建个人 uledev.json */
+function createOwnUleDevFile(){
+	var jsonPath = path.normalize(path.join(__ownPath, 'uledev.json'));
+	var exists = fs.existsSync(jsonPath);
+	if(exists) return;
+	var jsonDate = extend({}, uledevData);
+	jsonDate.localPath = __ownPath;
+	jsonDate.createDate = moment().format('YYYY-MM-DD');
+	writeJsonFile(jsonPath, jsonDate);
+	console.info('[ULE] 创建配置: ', jsonPath);
+}
+
+/** 写json文件 */
+function writeJsonFile(path, data){
+	fs.writeFileSync(path, JSON.stringify(data, null, 4));
 }
 
 module.exports = {
-	name: packageData.name,
-	version: packageData.version,
-	pid: configData.pid,
-	modluePath: configData.modulePath,
-	devPath: configData.devPath,
-	username: configData.username,
-	installed: function(){
-		configData.username = process.env.username;
-		configData.modulePath = __dirname;
-		updateJsonFile();
-		console.info('uledev 安装成功！\n\n');
+	initUleDev: function(){
+		initDefaultUleDevFile(__ownPath);
 	},
-	updatePid: function(value){
-		configData.pid = value;
-		updateJsonFile();
+	createOwnUleDev: function(){
+		createOwnUleDevFile(__ownPath);
 	},
 	getUledevData: function(){
-		log(configData);
-		return uledevData;
+		var ownJsonPath = path.normalize(path.join(__ownPath, 'uledev.json'));
+		var ownJsonData = require(ownJsonPath);
+		return ownJsonData || uledevData;
+	},
+	createOwnUledevEvent: function(){
+		var ownJsonPath = path.normalize(path.join(__ownPath, 'uledev-event.json'));
+		var exists = fs.existsSync(ownJsonPath);
+		if(!exists) writeJsonFile(ownJsonPath, eventData);
+
+	},
+	getUledevEventData: function(){
+		var ownJsonPath = path.normalize(path.join(__ownPath, 'uledev-event.json'));
+		var exists = fs.existsSync(ownJsonPath);
+		if(!exists) this.createOwnUledevEvent();
+		var ownJsonData = require(ownJsonPath);
+		delete require.cache[ownJsonPath];
+		return ownJsonData || eventData;
 	}
 };

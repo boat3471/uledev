@@ -6,8 +6,9 @@
 	<link rel="stylesheet" href="/public/c/event.css">
 </head>
 <body>
-<div class="event-init-box">
-	<h2>初始化活动开发环境&nbsp;(&nbsp;已初始化可跳过&nbsp;)：</h2>
+<h2>个人开发目录: <%= __ownPath %></h2>
+<div class="event-init-box" style="display: none;">
+	<h3>初始化活动开发环境&nbsp;(&nbsp;已初始化可跳过&nbsp;)：</h3>
 	<div class="box-content def">
 		<form id="eventDirectorySetForm" method="post" action="/eventDirectorySet.do" enctype="multipart/form-data">
 			<input id="eventDirectoryFileInput" name="eventDirectoryFileInput" type="file" accept="application/json"><br>
@@ -21,9 +22,14 @@
 		错误：上传的配置文件不符！<a href="/event">重新初始化</a>
 	</div>
 </div>
-
+<div class="event-type-name">
+	<h3>输入活动名称：</h3>
+	<div class="box-content">
+		<input type="text">
+	</div>
+</div>
 <div class="event-type-box">
-	<h2>选择活动类型：</h2>
+	<h3>选择活动类型：</h3>
 	<div class="box-content">
 		<% for(var key in configData){ %>
 		<% var item = configData[key]; %>
@@ -31,10 +37,14 @@
 		<% } %>
 	</div>
 </div>
-<div class="event-type-name">
-	<h2>输入活动名称：</h2>
+<div class="event-type-box">
+	<h3>活动推荐位：</h3>
 	<div class="box-content">
-		<input type="text">
+	</div>
+</div>
+<div class="event-type-box">
+	<h3>活动商品模版：</h3>
+	<div class="box-content">
 	</div>
 </div>
 <script src="/public/j/jquery.js"></script>
