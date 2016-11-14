@@ -32,16 +32,19 @@ while(args.length){
 			handle();
 			break;
 		case 'event':
-			handle = require('./ule-modules/ule-event');
-			handle(args.shift());
+			// handle = require('./ule-modules/ule-event');
+			// handle(args.shift());
+			console.info('敬请期待！');
 			break;
 		case 'base64':
-			handle = require('./ule-modules/ule-base64');
-			handle();
+			// handle = require('./ule-modules/ule-base64');
+			// handle();
+			console.info('敬请期待！');
 			break;
 		case 'load':
-			handle = require('./ule-modules/ule-load');
-			handle();
+			// handle = require('./ule-modules/ule-load');
+			// handle();
+			console.info('敬请期待！');
 			break;
 		default:
 			console.info('\r\n  无效命令, 请执行 uledev -h 查询相关命令');

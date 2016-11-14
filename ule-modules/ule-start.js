@@ -32,7 +32,6 @@ function _createDirectory(){
 function _start(){
 	require('../ule-server/hosts')();
 	require('../ule-server/app')();
-	//_config.getUledevData();
 }
 
 module.exports = function(){
