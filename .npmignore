@@ -1,5 +1,6 @@
 /_
 /node_modules
+/uledev-pid.json
 .npmignore
 .gitignore
 .idea

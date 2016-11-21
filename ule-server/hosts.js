@@ -14,22 +14,21 @@ module.exports = function(){
 	for(var i = 0; i < hosts.length; i++){
 		var host = hosts[i];
 		if(fileContent.indexOf(host) < 0)
-			content += '127.0.0.1 ' + host + '\n';
+			content += '127.0.0.1 ' + host + '\r\n';
 		log('配置HOST: ', host);
 	}
 	if(!content) return;
+	log(content);
 	var list = [
 		fileContent,
-		'\n\n',
-		'## uledev ##\n',
-		'##\n',
+		'',
+		'## uledev hosts ##',
+		'##\r\n',
 		content,
-		'##\n',
-		'## uledev ##',
-		'\n\n'
+		'##',
+		'## uledev hosts ##'
 	];
-	// content = fileContent + '\n\n' + content;
-	fs.writeFile(hostsPath, list.join(''), function(err){
+	fs.writeFile(hostsPath, list.join('\r\n'), function(err){
 		if(err){
 			switch(err.errno){
 				case -4048:

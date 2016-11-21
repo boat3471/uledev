@@ -13,11 +13,17 @@
 		"body-parser": "1.15.2",
 		"morgan": "1.7.0",
 		"debug": "2.3.2",
-		"ejs": "2.5.2",
-		"extend": "3.0.0",
-		"moment": "2.16.0",
-		"read": "1.0.7",
-		"formidable": "1.0.17"
+		"ejs": "",
+		"extend": "",
+		"moment": "",
+		"read": "",
+		"formidable": "",
+		"glup": "",
+		"gulp-copy": "",
+		"gulp-rename": "",
+		"gulp-imagemin": "",
+		"gulp-concat": "",
+		"gulp-uglify": ""
 	},
 	"maybeDescription": {
 		"cookie-parser": "1.4.3",

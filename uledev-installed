@@ -1,3 +1,106 @@
 #!/usr/bin/env node
+var fs = require('fs');
+var path = require('path');
+var read = require('read');
+var extend = require('extend');
+var cmd = require('child_process');
 
-console.info('  uledev 安装成功！\n\n');
+var cssCompile = '';
+var username = process.env.username;
+
+var taskList = [
+	{
+		name: '请输入你的名称: ',
+		type: 'name',
+		default: username
+	},
+	{
+		name: '请选择CSS编译器: ',
+		type: 'css',
+		default: 'gulp-stylus',
+		error: 'Error. 请选择正确的CSS编译器！',
+		valid: ['1', '2', '3', 'gulp-stylus', 'gulp-sass', 'gulp-less'],
+		readme: '可选择CSS编译器: 1: gulp-stylus, 2: gulp-sass, 3: gulp-less'
+	},
+	{
+		name: '全局安装CSS编译器: ',
+		type: 'css',
+		default: '',
+		handle: cssCompileHandler
+	}
+];
+
+(function(){
+	/* 创建进程ID记录文件 */
+	createPidFile();
+	/* 配置个人偏好设置 */
+	readInput();
+})();
+
+function readInput(){
+	if(taskList.length <= 0){
+		console.info('\nuledev 安装完成！\n');
+		return;
+	}
+	var item = taskList.shift();
+	if(item.handle){
+		item.handle();
+	}else{
+		item.readme && console.info(item.readme);
+		read({prompt: item.name, default: item.default}, function(a1, value){
+			if(value){
+				if(item.valid && item.valid.indexOf(value) < 0){
+					if(item.error) console.info('\r\n', item.error, '\r\n');
+					taskList.splice(0, 0, item);
+					readInput();
+					return;
+				}
+				switch(item.type){
+					case 'name':
+						username = value;
+						break;
+					case 'css':
+						switch(value){
+							case '1': cssCompile = 'gulp-stylus'; break;
+							case '2': cssCompile = 'gulp-sass'; break;
+							case '3': cssCompile = 'gulp-less'; break;
+							default: cssCompile = value; break;
+						}
+						break;
+				}
+				readInput();
+			}else{
+				if(item.error){
+					taskList.splice(0, 0, item);
+					console.info('');
+					console.info(item.error);
+				}
+				readInput();
+			}
+		});
+	}
+}
+
+function createPidFile(){
+	var jsonPath = path.normalize('./uledev-pid.json');
+	if(fs.existsSync(jsonPath)) return;
+	fs.writeFileSync(jsonPath, '0');
+}
+function cssCompileHandler(){
+	var packageJson = require('./package.json');
+	packageJson.dependencies[cssCompile] = '';
+	packageJson.dependencies['gulp-sourcemaps'] = '';
+	packageJson.dependencies['gulp-autoprefixer'] = '';
+	readInput();
+	// var cmdstring = '';
+	// switch(item.type){
+	// 	case 'css':
+	// 		cmdstring = item.cmd + cssCompile;
+	// 		console.info('');
+	// 		console.info(cmdstring);
+	// 		cmd.exec(cmdstring, function(){
+	// 			readInput();
+	// 		});
+	// 		break;
+	// }
+}
