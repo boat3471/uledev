@@ -18,7 +18,6 @@ module.exports = function(){
 		log('配置HOST: ', host);
 	}
 	if(!content) return;
-	log(content);
 	var list = [
 		fileContent,
 		'',
