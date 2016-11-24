@@ -1,4 +1,4 @@
-[ULEDEV](https://github.com/boat3471/uledev) — 用于构建邮乐前端个人开发环境
+[ULEDEV](https://github.com/boat3471/uledev) — 构建邮乐前端个人开发环境
 ==================================================
 
 贡献
