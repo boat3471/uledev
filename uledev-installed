@@ -13,22 +13,15 @@ var taskList = [
 		name: '请输入你的名称: ',
 		type: 'name',
 		default: username
+	},
+	{
+		name: '请选择CSS编译器: ',
+		type: 'css',
+		default: 'gulp-stylus',
+		error: 'Error. 请选择正确的CSS编译器！',
+		valid: ['1', '2', '3', 'gulp-stylus', 'gulp-sass', 'gulp-less'],
+		readme: '可选择CSS编译器: 1: gulp-stylus, 2: gulp-sass, 3: gulp-less'
 	}
-	// ,
-	// {
-	// 	name: '请选择CSS编译器: ',
-	// 	type: 'css',
-	// 	default: 'gulp-stylus',
-	// 	error: 'Error. 请选择正确的CSS编译器！',
-	// 	valid: ['1', '2', '3', 'gulp-stylus', 'gulp-sass', 'gulp-less'],
-	// 	readme: '可选择CSS编译器: 1: gulp-stylus, 2: gulp-sass, 3: gulp-less'
-	// },
-	// {
-	// 	name: '全局安装CSS编译器: ',
-	// 	type: 'css',
-	// 	default: '',
-	// 	handle: cssCompileHandler
-	// }
 ];
 
 (function(){
@@ -40,7 +33,7 @@ var taskList = [
 
 function readInput(){
 	if(taskList.length <= 0){
-		console.info('\nuledev 安装完成！\n');
+		installComplete();
 		return;
 	}
 	var item = taskList.shift();
@@ -87,19 +80,11 @@ function createPidFile(){
 	if(fs.existsSync(jsonPath)) return;
 	fs.writeFileSync(jsonPath, '0');
 }
-function cssCompileHandler(){
-	var packageJson = require('./package.json');
-	packageJson.dependencies[cssCompile] = '';
-	readInput();
-	// var cmdstring = '';
-	// switch(item.type){
-	// 	case 'css':
-	// 		cmdstring = item.cmd + cssCompile;
-	// 		console.info('');
-	// 		console.info(cmdstring);
-	// 		cmd.exec(cmdstring, function(){
-	// 			readInput();
-	// 		});
-	// 		break;
-	// }
+
+function installComplete(){
+	var uledevJson = require('./ule-conf/uledev.json');
+	uledevJson.css.type = cssCompile;
+	uledevJson.username = username;
+	fs.writeFileSync(__dirname + '/ule-conf/uledev.json', JSON.stringify(uledevJson, null, 4));
+	console.info('\nuledev 安装完成！\n');
 }

@@ -20,8 +20,8 @@
             "pwd": ""
         }
     },
-    "css-compile": {
-        "compiler": "less/sass/stylus",
-        "compress": true
+    "css": {
+        "type": "gulp-stylus",
+        "compress": false
     }
 }
