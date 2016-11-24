@@ -15,7 +15,7 @@ while(args.length){
 	switch(arg){
 		case '-h':
 		case 'help':
-			var cmdList = require('./cmd.json');
+			var cmdList = require('./ule-conf/help.json');
 			console.info('');
 			console.info(cmdList.join('\n'));
 			console.info('');
