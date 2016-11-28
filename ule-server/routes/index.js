@@ -1,13 +1,13 @@
-var config = require('../../uledev-config');
 var fs = require('fs');
 var url = require('url');
 var router = __express.Router();
 var formidable = require('formidable');
+var tools = require('../../uledev-tools');
 var cmd = require('child_process');
 
 // cmd.exec('explorer /e,' + 'D:\\group001');
 
-var uledevDate = config.getUledevData();
+var uledevDate = tools.getUledevData();
 
 /* GET home page. */
 router.get('/', function(req, res, next){
@@ -16,7 +16,7 @@ router.get('/', function(req, res, next){
 
 /* GET event page. */
 router.get('/event', function(req, res, next){
-	var uledeveEventDate = config.getUledevEventData();
+	var uledeveEventDate = tools.getUledevEventData();
 	res.render('event', {configData: uledeveEventDate});
 });
 

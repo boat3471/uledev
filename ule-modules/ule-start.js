@@ -2,17 +2,15 @@
  * Created by xinwenchao on 2016/11/4.
  * 启动开发环境
  */
-require('./base/console');
-
-var path = require('path');
 var fs = require('fs');
-var mkdirs = require('./base/mkdirs');
-var _config = require('../uledev-config');
-var _ownPath = process.cwd();
+var path = require('path');
+var tools = require('../uledev-tools');
+var moment = require('moment');
+var ownPath = process.cwd();
 
 /* 创建启动文件 */
 function _createLaunchFile(){
-	var filePath = path.normalize(path.join(_ownPath, 'uledev.cmd'));
+	var filePath = path.join(ownPath, 'uledev.cmd');
 	var exists = fs.existsSync(filePath);
 	if(exists) return;
 	var cmdList = [
@@ -23,9 +21,19 @@ function _createLaunchFile(){
 
 /* 创建目录结构 */
 function _createDirectory(){
-	mkdirs(_ownPath, 'wwwroot');
-	mkdirs(_ownPath, 'webroot');
-	mkdirs(_ownPath, 'webroot-src');
+	tools.mkdirs(ownPath, 'wwwroot');
+	tools.mkdirs(ownPath, 'webroot');
+	tools.mkdirs(ownPath, 'webroot-src');
+}
+
+/* 创建个人配置文件 */
+function _createOwnUleDevJsonFile(){
+	var ownUledevPath = path.join(ownPath, 'uledev.json');
+	if(fs.existsSync(ownUledevPath)) return;
+	var uledevData = require('../ule-conf/uledev.json');
+	uledevData.dir.own = ownPath;
+	tools.writeJsonFile(uledevData, ownUledevPath);
+	console.info('[ULE] 创建配置: ', ownUledevPath);
 }
 
 /* 开启ULEDEV */
@@ -35,9 +43,8 @@ function _start(){
 }
 
 module.exports = function(){
-	global.__ownPath = _ownPath;
-	_config.initUleDev();
-	_config.createOwnUleDev();
+	tools.ownPath = ownPath;
+	_createOwnUleDevJsonFile();
 	_createLaunchFile();
 	_createDirectory();
 	_start();

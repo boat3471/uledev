@@ -3,54 +3,21 @@ var fs = require('fs');
 var path = require('path');
 var extend = require('extend');
 var moment = require('moment');
-var isdev = fs.existsSync(path.join(__dirname, '.dev'));
 var uledevData = require('./ule-conf/uledev.json');
 var eventData = require('./ule-conf/uledev-event.json');
 
-var _username = process.env.username;
-var _modulePath = __dirname;
-
-/** 初始化默认的 uledev.json */
-function initDefaultUleDevFile(){
-	var jsonPath = __dirname + '/ule-conf/uledev.json';
-	uledevData.username = _username;
-	uledevData.modulePath = _modulePath;
-	writeJsonFile(jsonPath, uledevData);
-}
-
-/** 创建个人 uledev.json */
-function createOwnUleDevFile(){
-	var jsonPath = path.normalize(path.join(__ownPath, 'uledev.json'));
-	var exists = fs.existsSync(jsonPath);
-	if(exists) return;
-	var jsonDate = extend({}, uledevData);
-	jsonDate.localPath = __ownPath;
-	jsonDate.createDate = moment().format('YYYY-MM-DD');
-	writeJsonFile(jsonPath, jsonDate);
-	console.info('[ULE] 创建配置: ', jsonPath);
-}
-
-/** 写json文件 */
-function writeJsonFile(path, data){
-	fs.writeFileSync(path, JSON.stringify(data, null, 4));
-}
-
 module.exports = {
-	initUleDev: function(){
-		initDefaultUleDevFile(__ownPath);
-	},
-	createOwnUleDev: function(){
-		createOwnUleDevFile(__ownPath);
-	},
+	rootPath: __dirname,
+	ownPath: '',
 	getUledevData: function(){
-		var ownJsonPath = path.normalize(path.join(__ownPath, 'uledev.json'));
+		var ownJsonPath = path.join(this.ownPath, 'uledev.json');
 		var ownJsonData = require(ownJsonPath);
 		return ownJsonData || uledevData;
 	},
 	createOwnUledevEvent: function(){
 		var ownJsonPath = path.normalize(path.join(__ownPath, 'uledev-event.json'));
 		var exists = fs.existsSync(ownJsonPath);
-		if(!exists) writeJsonFile(ownJsonPath, eventData);
+		if(!exists) this.writeJsonFile(eventData, ownJsonPath);
 
 	},
 	getUledevEventData: function(){
@@ -61,9 +28,25 @@ module.exports = {
 		delete require.cache[ownJsonPath];
 		return ownJsonData || eventData;
 	},
+	mkdirs: function(){
+		if(!arguments || arguments.length == 0) return;
+		var list = Array.prototype.slice.apply(arguments);
+		var dirPath = list.shift() || process.cwd();
+		while(list.length){
+			var item = list.shift();
+			dirPath = path.normalize(path.join(dirPath, item));
+			var exists = fs.existsSync(dirPath);
+			if(exists) continue;
+			fs.mkdirSync(dirPath);
+			console.info('[ULE] 创建目录: ', dirPath);
+		}
+	},
 	writeJsonFile: function(data, path){
 		if(!path) return;
 		data = data || {};
 		fs.writeFileSync(path, JSON.stringify(data, null, 4));
+	},
+	isDev: function(){
+		fs.existsSync(path.join(__dirname, '.dev'));
 	}
 };

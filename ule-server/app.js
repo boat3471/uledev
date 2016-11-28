@@ -1,10 +1,9 @@
-var config = require('../uledev-config');
+var console = require('./core/console');
 var express = require('express');
 var expressApp = express();
 var http = require('http');
 var server = http.createServer(expressApp);
 var port = 80;
-
 function onError(error){
 	if(error.syscall !== 'listen')
 		throw error;
@@ -41,11 +40,12 @@ function normalizePort(val){
 		return port;
 	return false;
 }
-
+var tools = require('../uledev-tools');
 module.exports = function(){
-	var uledevData = config.getUledevData();
+	var uledevData = require('../ule-conf/uledev.json');
 	port = normalizePort(process.env.PORT || uledevData.port);
-	global.__modluePath = uledevData.modulePath;
+	global.__ownPath = process.cwd();
+	global.__modluePath = uledevData.dir.uledev.root;
 	global.__express = express;
 	global.__app = expressApp;
 
