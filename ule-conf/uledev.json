@@ -1,8 +1,6 @@
 {
     "username": "xinwenchao",
-    "modulePath": "D:\\uledev",
-    "localPath": "",
-    "createDate": "",
+    "installDate": "",
     "hostsPath": "C:/WINDOWS/System32/drivers/etc/hosts",
     "hosts": [
         "i0.dev.ule.com",
@@ -23,5 +21,16 @@
     "css": {
         "type": "gulp-stylus",
         "compress": false
+    },
+    "dir": {
+        "uledev": {
+            "root": "D:\\uledev",
+            "conf": "D:\\uledev\\uledev-conf",
+            "modules": "D:\\uledev\\ule-modules",
+            "server": "D:\\uledev\\ule-server"
+        },
+        "own": {
+            "root": ""
+        }
     }
 }

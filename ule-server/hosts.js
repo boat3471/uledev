@@ -18,20 +18,18 @@ module.exports = function(){
 		log('配置HOST: ', host);
 	}
 	if(!content) return;
-	var list = [
-		fileContent,
-		'',
-		'## uledev hosts ##',
-		'##\r\n',
-		content,
-		'##',
-		'## uledev hosts ##'
-	];
+	var list = [fileContent, ''];
+	if(fileContent.length == 0) list = [];
+	list.push('## uledev hosts ##');
+	list.push('##\r\n');
+	list.push(content);
+	list.push('##');
+	list.push('## uledev hosts ##');
 	fs.writeFile(hostsPath, list.join('\r\n'), function(err){
 		if(err){
 			switch(err.errno){
 				case -4048:
-					assert('HOSTS 文件只读权限, 无法写入！');
+					assert('请修改HOSTS文件权限, HOSTS文件为只读权限, 无法写入！');
 					break;
 				default:
 					assertFail(err);

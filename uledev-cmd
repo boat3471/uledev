@@ -6,8 +6,6 @@ if(!args.length) return console.info('\r\n  简单就是终极的复杂 · 达�
 
 var fs = require('fs');
 var path = require('path');
-var extend = require('extend');
-
 var arg = '', handle = null;
 
 while(args.length){
@@ -15,7 +13,7 @@ while(args.length){
 	switch(arg){
 		case '-h':
 		case 'help':
-			var cmdList = require('./ule-conf/help.json');
+			var cmdList = require('./ule-conf/uledev-help.json');
 			console.info('');
 			console.info(cmdList.join('\n'));
 			console.info('');

@@ -3,6 +3,9 @@ var fs = require('fs');
 var url = require('url');
 var router = __express.Router();
 var formidable = require('formidable');
+var cmd = require('child_process');
+
+// cmd.exec('explorer /e,' + 'D:\\group001');
 
 var uledevDate = config.getUledevData();
 
