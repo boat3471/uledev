@@ -5,7 +5,7 @@
 	<style>
 		html, body { padding: 0 20px; margin: 0; font: 12px "微软雅黑", "宋体";  }
 		body { overflow-y: auto; }
-		a {display: inline-block; height: 16px; font: bold 12px/16px "微软雅黑", "宋体"; text-decoration: none; padding: 3px 10px; background-color: #bebebe; margin: 6px; border-radius: 3px; color: brown; }
+		.links-box a {display: inline-block; height: 16px; font: bold 12px/16px "微软雅黑", "宋体"; text-decoration: none; padding: 3px 10px; background-color: #bebebe; margin: 6px; border-radius: 3px; color: brown; }
 		li { font-size: 12px; }
 		code { font-family: Consolas; color: #8B2323; padding: 0 15px; }
 		h1 i { vertical-align: middle; }
@@ -18,38 +18,40 @@
 <h1><i>welcome to <%= title %> - <%= username %></i><span> 这里属于你自己的邮乐前端开发环境</span></h1>
 <h2>个人开发目录: <%= __ownPath %></h2>
 <table style="width: 100%;" border="1" cellpadding="0" cellspacing="0">
-	<thead><tr><td>标题</td><td>路径</td><td>操作</td></tr></thead>
+	<thead><tr><td>标题</td><td>路径</td></tr></thead>
+	<thead><tr><td>根路径</td><td><a href="javascript:void(0);" class="explorer-link"><%= rootPath %></a></td></tr></thead>
+	<thead><tr><td>个人路径</td><td><a href="javascript:void(0);" class="explorer-link"><%= ownPath %></a></td></tr></thead>
 </table>
-
 <hr>
-<a href="https://github.com/boat3471/uledev" target="_blank">Uledev Document</a>
-<a href="https://www.npmjs.com/package/uledev" target="_blank">Uledev NPM</a>
-<a href="http://json.cn/" target="_blank">JSON格式化</a>
-<a href="http://www.w3school.com.cn/index.html" target="_blank">w3school</a>
-<a href="http://jquery.com/" target="_blank">jQuery 官网</a>
-<a href="http://api.jquery.com/" target="_blank">jQuery Api</a>
-<a href="http://jquery.cuishifeng.cn/" target="_blank">jQuery Api CN</a>
-<a href="https://code.jquery.com/jquery/" target="_blank">jQuery All Download</a>
-<a href="http://nodejs.cn/" target="_blank">Nodejs CN</a>
-<hr>
-<a href="http://gr.uletm.com/pmdm/login.jsp" target="_blank">GR</a>
-<a href="http://beta.ule.com/wd/" target="_blank">前端小组</a>
-<a href="http://wiki.uletm.com/dashboard.action" target="_blank">ULE Wiki</a>
-<a href="http://tomauth.ule.cn/cas/login" target="_blank">运营中心</a>
-<a href="http://cs.ule.com/csadmin/user_security_check.do" target="_blank">业务管理平台</a>
-<a href="http://dm.uletm.com/dmv2/user!login.do" target="_blank">系统发布平台</a>
-<br>
-<a href="http://cms.ulecn.tom.com/opencms/system/login/TomShopping/TomShopping-WD/" target="_blank">Open CMS</a>
-<a href="https://portal.chinanetcenter.com/cas/login?service=http%3A%2F%2Fmyview.chinanetcenter.com%2Fr_sec_login#0" target="_blank">旧版CDN缓存</a>
-<a href="https://portal.chinanetcenter.com/cas/login?service=https%3A%2F%2Fsi.chinanetcenter.com%2Fr_sec_login" target="_blank">新版CDN缓存</a>
-<a href="http://portal.baishancloud.com/account/index/login" target="_blank">白云山缓存清理</a>
-<br>
-<a href="http://www.dev.ule.com/event" target="_blank">创建活动</a>
-<a href="http://www.dev.ule.com/setting?type=ftp" target="_blank">配置ftp</a>
-<a href="http://www.dev.ule.com/setting?type=print" target="_blank">配置打印机</a>
-<a href="http://www.dev.ule.com/setting?type=upan" target="_blank">配置共享盘</a>
-<a href="http://www.dev.ule.com/setting?type=opencms" target="_blank">配置Opencms</a>
-
+<div class="links-box">
+	<a href="https://github.com/boat3471/uledev" target="_blank">Uledev Document</a>
+	<a href="https://www.npmjs.com/package/uledev" target="_blank">Uledev NPM</a>
+	<a href="http://json.cn/" target="_blank">JSON格式化</a>
+	<a href="http://www.w3school.com.cn/index.html" target="_blank">w3school</a>
+	<a href="http://jquery.com/" target="_blank">jQuery 官网</a>
+	<a href="http://api.jquery.com/" target="_blank">jQuery Api</a>
+	<a href="http://jquery.cuishifeng.cn/" target="_blank">jQuery Api CN</a>
+	<a href="https://code.jquery.com/jquery/" target="_blank">jQuery All Download</a>
+	<a href="http://nodejs.cn/" target="_blank">Nodejs CN</a>
+	<hr>
+	<a href="http://gr.uletm.com/pmdm/login.jsp" target="_blank">GR</a>
+	<a href="http://beta.ule.com/wd/" target="_blank">前端小组</a>
+	<a href="http://wiki.uletm.com/dashboard.action" target="_blank">ULE Wiki</a>
+	<a href="http://tomauth.ule.cn/cas/login" target="_blank">运营中心</a>
+	<a href="http://cs.ule.com/csadmin/user_security_check.do" target="_blank">业务管理平台</a>
+	<a href="http://dm.uletm.com/dmv2/user!login.do" target="_blank">系统发布平台</a>
+	<br>
+	<a href="http://cms.ulecn.tom.com/opencms/system/login/TomShopping/TomShopping-WD/" target="_blank">Open CMS</a>
+	<a href="https://portal.chinanetcenter.com/cas/login?service=http%3A%2F%2Fmyview.chinanetcenter.com%2Fr_sec_login#0" target="_blank">旧版CDN缓存</a>
+	<a href="https://portal.chinanetcenter.com/cas/login?service=https%3A%2F%2Fsi.chinanetcenter.com%2Fr_sec_login" target="_blank">新版CDN缓存</a>
+	<a href="http://portal.baishancloud.com/account/index/login" target="_blank">白云山缓存清理</a>
+	<br>
+	<a href="http://www.dev.ule.com/event" target="_blank">创建活动</a>
+	<a href="http://www.dev.ule.com/setting?type=ftp" target="_blank">配置ftp</a>
+	<a href="http://www.dev.ule.com/setting?type=print" target="_blank">配置打印机</a>
+	<a href="http://www.dev.ule.com/setting?type=upan" target="_blank">配置共享盘</a>
+	<a href="http://www.dev.ule.com/setting?type=opencms" target="_blank">配置Opencms</a>
+</div>
 
 <h2>如何创建邮乐活动？</h2>
 <ol>
@@ -64,5 +66,20 @@
 </ol>
 <!--<h2>旧版CDN缓存用户名：tom_mv2  密码：tom_purge123</h2>-->
 <!--<h2>白云山CDN缓存 ule_wd/Wd20161117</h2>-->
+<script src="/public/j/jquery.js"></script>
+<script>
+	$(function(){
+		$('.explorer-link').click(function(){
+			var path = $(this).html();
+			$.ajax({
+				url: '/explorer',
+				data: { path: path },
+				success: function(data){
+					alert(data);
+				}
+			})
+		});
+	});
+</script>
 </body>
 </html>

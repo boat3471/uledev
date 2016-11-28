@@ -45,7 +45,7 @@ module.exports = function(){
 	var uledevData = require('../ule-conf/uledev.json');
 	port = normalizePort(process.env.PORT || uledevData.port);
 	global.__ownPath = process.cwd();
-	global.__modluePath = uledevData.dir.uledev.root;
+	global.__modluePath = uledevData.dir.rootPath;
 	global.__express = express;
 	global.__app = expressApp;
 

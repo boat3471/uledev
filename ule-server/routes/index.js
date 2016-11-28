@@ -5,13 +5,23 @@ var formidable = require('formidable');
 var tools = require('../../uledev-tools');
 var cmd = require('child_process');
 
-// cmd.exec('explorer /e,' + 'D:\\group001');
-
 var uledevDate = tools.getUledevData();
-
+log(uledevDate);
 /* GET home page. */
 router.get('/', function(req, res, next){
-	res.render('index', {username: uledevDate.username, title: 'uledev'});
+	res.render('index', {
+		title: 'uledev',
+		username: uledevDate.username,
+		rootPath: uledevDate.dir.rootPath,
+		ownPath: uledevDate.dir.ownPath
+	});
+});
+
+/* 打开资源管理器 */
+router.get('/explorer', function(req, res, next){
+	var params = url.parse(req.url, true).query;
+	cmd.exec('explorer /e,' + params.path);
+	res.json({});
 });
 
 /* GET event page. */

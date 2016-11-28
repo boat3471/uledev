@@ -17,10 +17,10 @@ function createPidFile(){
 function initPreference(){
 	var uledevJson = require('./ule-conf/uledev.json');
 	uledevJson.username = username;
-	uledevJson.dir.uledev.root = __dirname;
-	uledevJson.dir.uledev.conf = __dirname + '\\uledev-conf';
-	uledevJson.dir.uledev.modules = __dirname + '\\ule-modules';
-	uledevJson.dir.uledev.server = __dirname + '\\ule-server';
+	uledevJson.dir.rootPath = __dirname;
+	uledevJson.dir.confPath = __dirname + '\\uledev-conf';
+	uledevJson.dir.modulesPath = __dirname + '\\ule-modules';
+	uledevJson.dir.serverPath = __dirname + '\\ule-server';
 	uledevJson.installDate = moment().format('YYYY-MM-DD');
 	uledevJson.hostsPath = 'C:/WINDOWS/System32/drivers/etc/hosts';
 	uledevJson.hosts = [
@@ -36,10 +36,10 @@ function initPreference(){
 
 	console.info('');
 	console.info('★ 你好 ' + username + '！欢迎安装uledev开发环境\n');
-	console.info('★ 安装目录: ' + uledevJson.dir.uledev.root);
-	console.info('★ 配置目录: ' + uledevJson.dir.uledev.conf);
-	console.info('★ 模块目录: ' + uledevJson.dir.uledev.modules);
-	console.info('★ 服务目录: ' + uledevJson.dir.uledev.server + '\n');
+	console.info('★ 安装目录: ' + uledevJson.dir.rootPath);
+	console.info('★ 配置目录: ' + uledevJson.dir.confPath);
+	console.info('★ 模块目录: ' + uledevJson.dir.modulesPath);
+	console.info('★ 服务目录: ' + uledevJson.dir.serverPath + '\n');
 	console.info('★ 安装完成！\n');
 }
 

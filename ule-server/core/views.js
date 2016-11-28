@@ -1,6 +1,6 @@
 var path = require('path');
-var routesPath = path.normalize(path.join(__modluePath, '/ule-server/routes/index'));
-var viewsPath = path.normalize(path.join(__modluePath, '/ule-server/views'));
+var routesPath = path.join(__modluePath, '/ule-server/routes/index');
+var viewsPath = path.join(__modluePath, '/ule-server/views');
 var publicPath = path.join(__modluePath, '/ule-server/public');
 var webrootPath = path.join(__ownPath, 'webroot');
 var wwwrootPath = path.join(__ownPath, 'wwwroot');

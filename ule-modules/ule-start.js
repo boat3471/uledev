@@ -31,7 +31,7 @@ function _createOwnUleDevJsonFile(){
 	var ownUledevPath = path.join(ownPath, 'uledev.json');
 	if(fs.existsSync(ownUledevPath)) return;
 	var uledevData = require('../ule-conf/uledev.json');
-	uledevData.dir.own = ownPath;
+	uledevData.dir.ownPath = ownPath;
 	tools.writeJsonFile(uledevData, ownUledevPath);
 	console.info('[ULE] 创建配置: ', ownUledevPath);
 }

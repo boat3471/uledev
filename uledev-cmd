@@ -51,11 +51,12 @@ while(args.length){
 }
 
 function killProcess(){
+	var pidPath = path.join(__dirname, 'uledev-pid.json');
 	var exec = require('child_process').exec;
-	var oldPid = require('./uledev-pid.json');
+	var oldPid = require(pidPath);
 	var newPid = process.pid;
 	if(oldPid > 0)
 		exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
-	fs.writeFileSync(__dirname + '/uledev-pid.json', newPid);
+	fs.writeFileSync(pidPath, newPid);
 	console.info('[ULE] 启动进程: ', newPid);
 }
