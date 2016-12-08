@@ -16,24 +16,20 @@ function createPidFile(){
 /* 配置个人偏好设置 */
 function initPreference(){
 	var uledevJson = require('./ule-conf/uledev.json');
-	uledevJson.username = username;
-	uledevJson.dir.rootPath = __dirname;
-	uledevJson.dir.confPath = __dirname + '\\uledev-conf';
-	uledevJson.dir.modulesPath = __dirname + '\\ule-modules';
-	uledevJson.dir.serverPath = __dirname + '\\ule-server';
-	uledevJson.installDate = moment().format('YYYY-MM-DD');
-	uledevJson.hostsPath = 'C:/WINDOWS/System32/drivers/etc/hosts';
-	uledevJson.hosts = [
-		'i0.dev.ule.com',
-		'i1.dev.ule.com',
-		'i2.dev.ule.com',
-		'www.dev.ule.com'
-	];
-	uledevJson.port = 80;
-	uledevJson.css.type = 'gulp-stylus';
+	if(!uledevJson.installDate) {
+		uledevJson.username = username;
+		uledevJson.dir.rootPath = __dirname;
+		uledevJson.dir.confPath = __dirname + '\\ule-conf';
+		uledevJson.dir.modulesPath = __dirname + '\\ule-modules';
+		uledevJson.dir.serverPath = __dirname + '\\ule-server';
+		uledevJson.installDate = moment().format('YYYY-MM-DD');
+		uledevJson.hostsPath = 'C:/WINDOWS/System32/drivers/etc/hosts';
+		uledevJson.hosts = '127.0.0.1 www.dev.ule.com i0.dev.ulecdn.com i1.dev.ulecdn.com i2.dev.ulecdn.com i3.dev.ulecdn.com';
+		uledevJson.port = 80;
+		uledevJson.css.type = 'gulp-stylus';
 
-	tools.writeJsonFile(uledevJson, path.join(__dirname, 'ule-conf/uledev.json'));
-
+		tools.writeJsonFile(uledevJson, path.join(__dirname, 'ule-conf/uledev.json'));
+	}
 	console.info('');
 	console.info('★ 你好 ' + username + '！欢迎安装uledev开发环境\n');
 	console.info('★ 安装目录: ' + uledevJson.dir.rootPath);

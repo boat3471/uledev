@@ -2,12 +2,7 @@
     "username": "xinwenchao",
     "installDate": "2016-11-28",
     "hostsPath": "C:/WINDOWS/System32/drivers/etc/hosts",
-    "hosts": [
-        "i0.dev.ule.com",
-        "i1.dev.ule.com",
-        "i2.dev.ule.com",
-        "www.dev.ule.com"
-    ],
+    "hosts": "127.0.0.1 www.dev.ule.com i0.dev.ulecdn.com i1.dev.ulecdn.com i2.dev.ulecdn.com i3.dev.ulecdn.com",
     "port": 80,
     "beta": {
         "ftp": {
