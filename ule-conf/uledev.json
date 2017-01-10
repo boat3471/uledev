@@ -1,27 +1,15 @@
 {
+    "installDate": "2017-01-10 11:16:21",
+    "updateDate": "2017-01-10 11:16:21",
     "username": "xinwenchao",
-    "installDate": "2016-11-28",
-    "hostsPath": "C:/WINDOWS/System32/drivers/etc/hosts",
-    "hosts": "127.0.0.1 www.dev.ule.com i0.dev.ulecdn.com i1.dev.ulecdn.com i2.dev.ulecdn.com i3.dev.ulecdn.com",
     "port": 80,
-    "beta": {
-        "ftp": {
-            "host": "",
-            "port": "",
-            "type": "",
-            "user": "",
-            "pwd": ""
-        }
-    },
-    "css": {
-        "type": "gulp-stylus",
-        "compress": false
-    },
     "dir": {
         "rootPath": "D:\\uledev",
-        "confPath": "D:\\uledev\\uledev-conf",
+        "confPath": "D:\\uledev\\ule-conf",
         "modulesPath": "D:\\uledev\\ule-modules",
-        "serverPath": "D:\\uledev\\ule-server",
-        "ownPath": ""
+        "serverPath": "D:\\uledev\\ule-server"
+    },
+    "css": {
+        "type": "gulp-stylus"
     }
 }

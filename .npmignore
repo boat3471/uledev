@@ -1,7 +1,8 @@
-/_
-/node_modules
-/uledev-pid.json
 .npmignore
 .gitignore
 .idea
-.dev
+/_
+/node_modules
+/ule-conf/uledev-pid.json
+/ule-conf/uledev.json
+/ule-conf/.dev

@@ -4,6 +4,7 @@ var expressApp = express();
 var http = require('http');
 var server = http.createServer(expressApp);
 var port = 80;
+
 function onError(error){
 	if(error.syscall !== 'listen')
 		throw error;
@@ -40,23 +41,25 @@ function normalizePort(val){
 		return port;
 	return false;
 }
-var tools = require('../uledev-tools');
-module.exports = function(){
-	var uledevData = require('../ule-conf/uledev.json');
-	port = normalizePort(process.env.PORT || uledevData.port);
-	global.__ownPath = process.cwd();
-	global.__modluePath = uledevData.dir.rootPath;
-	global.__express = express;
-	global.__app = expressApp;
 
-	// require('./favicon');
-	// require('./logger');
-	// require('./core/cookie');
-	require('./core/parser');
-	require('./core/views');
+module.exports = {
+	start: function(){
+		global.uledev = require('./../uledev');
 
-	expressApp.set('port', port);
-	server.listen(port);
-	server.on('error', onError);
-	server.on('listening', onListening);
+		global.__modluePath = uledev.dir.rootPath;
+		global.__express = express;
+		global.__app = expressApp;
+
+		// require('./favicon');
+		// require('./logger');
+		// require('./core/cookie');
+		require('./core/parser');
+		require('./core/views');
+
+		port = normalizePort(process.env.PORT || uledev.port);
+		expressApp.set('port', port);
+		server.listen(port);
+		server.on('error', onError);
+		server.on('listening', onListening);
+	}
 };

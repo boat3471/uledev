@@ -1,5 +1,6 @@
 /_
 /.idea
-/.dev
 /node_modules
-/uledev-pid.json
+/ule-conf/uledev.json
+/ule-conf/uledev-pid.json
+/ule-conf/.dev

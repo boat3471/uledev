@@ -15,13 +15,7 @@
 	</style>
 </head>
 <body>
-<h1><i>welcome to <%= title %> - <%= username %></i><span> 这里属于你自己的邮乐前端开发环境</span></h1>
-<h2>个人开发目录: <%= __ownPath %></h2>
-<table style="width: 100%;" border="1" cellpadding="0" cellspacing="0">
-	<thead><tr><td>标题</td><td>路径</td></tr></thead>
-	<thead><tr><td>根路径</td><td><a href="javascript:void(0);" class="explorer-link"><%= rootPath %></a></td></tr></thead>
-	<thead><tr><td>个人路径</td><td><a href="javascript:void(0);" class="explorer-link"><%= ownPath %></a></td></tr></thead>
-</table>
+<h1><i>welcome to <a href="javascript:void(0);" class="explorer-link" path="<%= rootPath %>"><%= title %></a> - <%= username %></i><span> 这里属于你自己的邮乐前端开发环境</span></h1>
 <hr>
 <div class="links-box">
 	<a href="https://github.com/boat3471/uledev" target="_blank">Uledev Document</a>
@@ -52,7 +46,11 @@
 	<a href="http://www.dev.ule.com/setting?type=upan" target="_blank">配置共享盘</a>
 	<a href="http://www.dev.ule.com/setting?type=opencms" target="_blank">配置Opencms</a>
 </div>
-
+<hr>
+<h3>常用工具</h3>
+<div class="links-box">
+	<a href="https://github.com/boat3471/uledev" target="_blank">文件压缩</a>
+</div>
 <h2>如何创建邮乐活动？</h2>
 <ol>
 	<li>安装Git, 如何安装请自行查阅资料</li>
@@ -62,23 +60,19 @@
 	<li>执行初始化命令: <code>uledev event init</code></li>
 	<li>执行创建命令: <code>uledev event</code></li>
 	<li>按照命令行提示输入指定内容</li>
-	<li>示例: <br><img src="/public/i/event-demo.png" alt=""></li>
+	<li>示例: <br><img src="/i2/event-demo.png" alt=""></li>
 </ol>
+<a href="http://www.infoq.com/cn/articles/front-end-engineering-and-performance-optimization-part1"><h2>静态资源版本更新与缓存?</h2></a>
+<a href="http://www.infoq.com/cn/articles/front-end-engineering-and-performance-optimization-part2"><h2>静态资源管理与模板框架?</h2></a>
+<a href="http://www.infoq.com/cn/articles/front-end-engineering-pristine-part3"><h2>前端工程构建工具</h2></a>
+<a href="http://fis.baidu.com/"><h2>百度前端构建工具</h2></a>
 <!--<h2>旧版CDN缓存用户名：tom_mv2  密码：tom_purge123</h2>-->
 <!--<h2>白云山CDN缓存 ule_wd/Wd20161117</h2>-->
-<script src="/public/j/jquery.js"></script>
+<script src="/i1/jquery.js"></script>
+<script src="/i1/uledev.js"></script>
 <script>
 	$(function(){
-		$('.explorer-link').click(function(){
-			var path = $(this).html();
-			$.ajax({
-				url: '/explorer',
-				data: { path: path },
-				success: function(data){
-					alert(data);
-				}
-			})
-		});
+
 	});
 </script>
 </body>

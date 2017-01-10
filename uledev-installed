@@ -1,55 +1,10 @@
 #!/usr/bin/env node
-var fs = require('fs');
-var path = require('path');
 var read = require('read');
-var moment = require('moment');
-var tools = require('./uledev-tools');
+var uledev = require('./uledev');
 var username = process.env.username;
+var hosts = require('./ule-modules/ule-hosts');
 
-/* 创建进程ID记录文件 */
-function createPidFile(){
-	var jsonPath = path.join(__dirname, 'uledev-pid.json');
-	if(fs.existsSync(jsonPath)) return;
-	fs.writeFileSync(jsonPath, '0');
-}
-
-/* 配置个人偏好设置 */
-function initPreference(){
-	var uledevJson = require('./ule-conf/uledev.json');
-	if(!uledevJson.installDate) {
-		uledevJson.username = username;
-		uledevJson.dir.rootPath = __dirname;
-		uledevJson.dir.confPath = __dirname + '\\ule-conf';
-		uledevJson.dir.modulesPath = __dirname + '\\ule-modules';
-		uledevJson.dir.serverPath = __dirname + '\\ule-server';
-		uledevJson.installDate = moment().format('YYYY-MM-DD');
-		uledevJson.hostsPath = 'C:/WINDOWS/System32/drivers/etc/hosts';
-		uledevJson.hosts = '127.0.0.1 www.dev.ule.com i0.dev.ulecdn.com i1.dev.ulecdn.com i2.dev.ulecdn.com i3.dev.ulecdn.com';
-		uledevJson.port = 80;
-		uledevJson.css.type = 'gulp-stylus';
-
-		tools.writeJsonFile(uledevJson, path.join(__dirname, 'ule-conf/uledev.json'));
-	}
-	console.info('');
-	console.info('★ 你好 ' + username + '！欢迎安装uledev开发环境\n');
-	console.info('★ 安装目录: ' + uledevJson.dir.rootPath);
-	console.info('★ 配置目录: ' + uledevJson.dir.confPath);
-	console.info('★ 模块目录: ' + uledevJson.dir.modulesPath);
-	console.info('★ 服务目录: ' + uledevJson.dir.serverPath + '\n');
-	console.info('★ 安装完成！\n');
-}
-
-/* 提示输入用户名 */
-function inputUserName(){
-	read({prompt: '请输入你的名称: ', default: username}, function(a, value){
-		username = value;
-		init();
-	});
-}
-
-inputUserName();
-
-function init(){
-	createPidFile();
-	initPreference();
-}
+read({prompt: '请输入你的名称: ', default: username}, function(a, value){
+	uledev.install(value);
+	hosts.init();
+});

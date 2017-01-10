@@ -2,61 +2,55 @@
 
 /* ↓↓↓ 输入参数检查 ↓↓↓ */
 var args = process.argv.slice(2);
-if(!args.length) return console.info('\r\n  简单就是终极的复杂 · 达芬奇');
-
 var fs = require('fs');
 var path = require('path');
+var uledev = require('./uledev');
 var arg = '', handle = null;
 
-while(args.length){
-	arg = args.shift();
-	switch(arg){
-		case '-h':
-		case 'help':
-			var cmdList = require('./ule-conf/uledev-help.json');
-			console.info('');
-			console.info(cmdList.join('\n'));
-			console.info('');
-			break;
-		case '-v':
-		case 'version':
-			var packageJson = require('./package.json');
-			console.info('\n ', packageJson.name, packageJson.version);
-			break;
-		case '-s':
-		case 'start':
-			killProcess();
-			handle = require('./ule-modules/ule-start');
-			handle();
-			break;
-		case 'event':
-			// handle = require('./ule-modules/ule-event');
-			// handle(args.shift());
-			console.info('敬请期待！');
-			break;
-		case 'base64':
-			// handle = require('./ule-modules/ule-base64');
-			// handle();
-			console.info('敬请期待！');
-			break;
-		case 'load':
-			// handle = require('./ule-modules/ule-load');
-			// handle();
-			console.info('敬请期待！');
-			break;
-		default:
-			console.info('\r\n  无效命令, 请执行 uledev -h 查询相关命令');
-			return;
+if(!args.length){
+	uledev.killProcess();
+	handle = require('./ule-modules/ule-start');
+	handle();
+}else{
+	while(args.length){
+		arg = args.shift();
+		switch(arg){
+			case '-h':
+			case 'help':
+				var cmdList = require('./ule-conf/uledev-help.json');
+				console.info('');
+				console.info(cmdList.join('\n'));
+				console.info('');
+				break;
+			case '-v':
+			case 'version':
+				var packageJson = require('./package.json');
+				console.info('\n ', packageJson.name, packageJson.version);
+				break;
+			case '-s':
+			case 'start':
+				uledev.killProcess();
+				handle = require('./ule-modules/ule-start');
+				handle();
+				break;
+			case 'event':
+				// handle = require('./ule-modules/ule-event');
+				// handle(args.shift());
+				console.info('敬请期待！');
+				break;
+			case 'base64':
+				// handle = require('./ule-modules/ule-base64');
+				// handle();
+				console.info('敬请期待！');
+				break;
+			case 'load':
+				// handle = require('./ule-modules/ule-load');
+				// handle();
+				console.info('敬请期待！');
+				break;
+			default:
+				console.info('\r\n  无效命令, 请执行 uledev -h 查询相关命令');
+				return;
+		}
 	}
-}
-
-function killProcess(){
-	var pidPath = path.join(__dirname, 'uledev-pid.json');
-	var exec = require('child_process').exec;
-	var oldPid = require(pidPath);
-	var newPid = process.pid;
-	if(oldPid > 0)
-		exec('taskkill /F /pid ' + oldPid, function(err, stdout, stderr){});
-	fs.writeFileSync(pidPath, newPid);
-	console.info('[ULE] 启动进程: ', newPid);
 }

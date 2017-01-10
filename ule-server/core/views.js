@@ -1,22 +1,22 @@
 var path = require('path');
-var routesPath = path.join(__modluePath, '/ule-server/routes/index');
-var viewsPath = path.join(__modluePath, '/ule-server/views');
-var publicPath = path.join(__modluePath, '/ule-server/public');
-var webrootPath = path.join(__ownPath, 'webroot');
-var wwwrootPath = path.join(__ownPath, 'wwwroot');
 // 设置视图引擎
-var routes = require(routesPath);
-__app.set('views', viewsPath);
+__app.set('views', pathWarp('/ule-server/views'));
 __app.set('view engine', 'ejs');
-__app.use('/', routes);
+__app.use('/', require(pathWarp('/ule-server/routes/index')));
+__app.use('/ule', require(pathWarp('/ule-server/routes/ule')));
+__app.use('/ule/util', require(pathWarp('/ule-server/routes/ule-util')));
 
 // 设置静态目录
-__app.use('/', __express.static(webrootPath));
-__app.use('/', __express.static(wwwrootPath));
-__app.use('/public', __express.static(publicPath));
+__app.use('/ule', __express.static(pathWarp('/ule-server/public')));
+__app.use('/i0', __express.static(pathWarp('/ule-server/public/c')));
+__app.use('/i1', __express.static(pathWarp('/ule-server/public/j')));
+__app.use('/i2', __express.static(pathWarp('/ule-server/public/i')));
+__app.use('/i3', __express.static(pathWarp('/ule-server/public/o')));
 
-log('静态目录: ', webrootPath);
-log('静态目录: ', wwwrootPath);
+
+function pathWarp(p){
+	return path.join(__modluePath, p);
+}
 
 // 设置404跳转, 如果未被路由中间件找到的路径, 进入这里统一处理为 404
 __app.use('/', function(req, res, next){
