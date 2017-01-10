@@ -8,10 +8,10 @@ __app.use('/ule/util', require(pathWarp('/ule-server/routes/ule-util')));
 
 // 设置静态目录
 __app.use('/ule', __express.static(pathWarp('/ule-server/public')));
-__app.use('/i0', __express.static(pathWarp('/ule-server/public/c')));
-__app.use('/i1', __express.static(pathWarp('/ule-server/public/j')));
-__app.use('/i2', __express.static(pathWarp('/ule-server/public/i')));
-__app.use('/i3', __express.static(pathWarp('/ule-server/public/o')));
+__app.use('/ule/c', __express.static(pathWarp('/ule-server/public/c')));
+__app.use('/ule/j', __express.static(pathWarp('/ule-server/public/j')));
+__app.use('/ule/i', __express.static(pathWarp('/ule-server/public/i')));
+__app.use('/ule/o', __express.static(pathWarp('/ule-server/public/o')));
 
 
 function pathWarp(p){
