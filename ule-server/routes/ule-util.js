@@ -8,12 +8,11 @@ var config = uledev.config;
 
 /* util home page. */
 router.get('/', function(req, res, next){
-	log('enter util home page');
-	res.render('index', {
+	log('enter util home');
+	res.render('ule', {
 		title: 'uledev',
 		username: config.username,
-		rootPath: config.dir.rootPath,
-		ownPath: config.dir.ownPath
+		installPath: config.dir.installPath
 	});
 });
 

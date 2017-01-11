@@ -3,14 +3,7 @@ var fs = require('fs');
 var assert = require('assert');
 var extend = require('extend');
 
-var listData = [
-	'127.0.0.1 www.dev.com dev.com',
-	'127.0.0.1 www.dev.ule.com',
-	'127.0.0.1 i0.dev.ulecdn.com',
-	'127.0.0.1 i1.dev.ulecdn.com',
-	'127.0.0.1 i2.dev.ulecdn.com',
-	'127.0.0.1 i3.dev.ulecdn.com'
-];
+var listData = require('./../ule-conf/uledev-hosts.json');
 
 function clean(hosts){
 	var oldlist = hosts.split('## uledev hosts start ##');

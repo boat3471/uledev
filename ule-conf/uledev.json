@@ -1,10 +1,10 @@
 {
-    "installDate": "2017-01-10 11:16:21",
-    "updateDate": "2017-01-10 11:16:21",
+    "installDate": "2017-01-11 10:22:56",
+    "updateDate": "2017-01-11 10:22:56",
     "username": "xinwenchao",
     "port": 80,
     "dir": {
-        "rootPath": "D:\\uledev",
+        "installPath": "D:\\uledev",
         "confPath": "D:\\uledev\\ule-conf",
         "modulesPath": "D:\\uledev\\ule-modules",
         "serverPath": "D:\\uledev\\ule-server"

@@ -8,7 +8,6 @@ var moment = require('moment');
 var uledev = require('./../uledev');
 var hosts = require('./../ule-modules/ule-hosts');
 var app = require('../ule-server/app');
-var ownPath = process.cwd();
 
 /* 创建启动文件 */
 function _createLaunchFile(){
@@ -60,7 +59,6 @@ function _readOwnDirectory(){
 }
 
 module.exports = function(){
-	uledev.ownPath = ownPath;
 	// _createOwnUleDevJsonFile();
 	// _createLaunchFile();
 	// _createDirectory();

@@ -1,4 +1,4 @@
-var console = require('./core/console');
+var console = require('./../ule-modules/console');
 var express = require('express');
 var expressApp = express();
 var http = require('http');
@@ -46,7 +46,7 @@ module.exports = {
 	start: function(){
 		global.uledev = require('./../uledev');
 
-		global.__modluePath = uledev.dir.rootPath;
+		global.__installPath = uledev.dir.installPath;
 		global.__express = express;
 		global.__app = expressApp;
 

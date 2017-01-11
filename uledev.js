@@ -4,8 +4,7 @@ var extend = require('extend');
 var moment = require('moment');
 var uledev = {
 	username: '',
-	rootPath: __dirname,
-	ownPath: '',
+	installPath: __dirname,
 	config: null,
 	port: 80,
 	createOwnUledevEvent: function(){
@@ -70,7 +69,7 @@ var uledev = {
 		uledevJson.username = username;
 		uledevJson.port = 80;
 		uledevJson.dir = uledevJson.dir || {};
-		uledevJson.dir.rootPath = __dirname;
+		uledevJson.dir.installPath = __dirname;
 		uledevJson.dir.confPath = __dirname + '\\ule-conf';
 		uledevJson.dir.modulesPath = __dirname + '\\ule-modules';
 		uledevJson.dir.serverPath = __dirname + '\\ule-server';
@@ -80,7 +79,7 @@ var uledev = {
 
 		console.info('');
 		console.info('★ 你好 ' + username + '！欢迎安装uledev开发环境\n');
-		console.info('★ 安装目录: ' + uledevJson.dir.rootPath);
+		console.info('★ 安装目录: ' + uledevJson.dir.installPath);
 		console.info('★ 配置目录: ' + uledevJson.dir.confPath);
 		console.info('★ 模块目录: ' + uledevJson.dir.modulesPath);
 		console.info('★ 服务目录: ' + uledevJson.dir.serverPath + '\n');

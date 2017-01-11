@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><%= title %>～<%= username %></title>
+	<title>★<%= title %>★<%= username %>★</title>
+	<% include common/favicon.ejs %>
 	<style>
 		html, body { padding: 0 20px; margin: 0; font: 12px "微软雅黑", "宋体";  }
 		body { overflow-y: auto; }
@@ -15,7 +16,7 @@
 	</style>
 </head>
 <body>
-<h1><i>welcome to <a href="javascript:void(0);" class="explorer-link" path="<%= rootPath %>"><%= title %></a> - <%= username %></i><span> 这里属于你自己的邮乐前端开发环境</span></h1>
+<h1><i>welcome to <a href="javascript:void(0);" class="explorer-link" path="<%= installPath %>"><%= title %></a> - <%= username %></i><span> 这里属于你自己的邮乐前端开发环境</span></h1>
 <hr>
 <div class="links-box">
 	<a href="https://github.com/boat3471/uledev" target="_blank">Uledev Document</a>
@@ -60,7 +61,7 @@
 	<li>执行初始化命令: <code>uledev event init</code></li>
 	<li>执行创建命令: <code>uledev event</code></li>
 	<li>按照命令行提示输入指定内容</li>
-	<li>示例: <br><img src="/ule/i/event-demo.png" alt=""></li>
+	<li>示例: <br><img src="/ulecdn/i/event-demo.png" alt=""></li>
 </ol>
 <a href="http://www.infoq.com/cn/articles/front-end-engineering-and-performance-optimization-part1"><h2>静态资源版本更新与缓存?</h2></a>
 <a href="http://www.infoq.com/cn/articles/front-end-engineering-and-performance-optimization-part2"><h2>静态资源管理与模板框架?</h2></a>
@@ -68,8 +69,8 @@
 <a href="http://fis.baidu.com/"><h2>百度前端构建工具</h2></a>
 <!--<h2>旧版CDN缓存用户名：tom_mv2  密码：tom_purge123</h2>-->
 <!--<h2>白云山CDN缓存 ule_wd/Wd20161117</h2>-->
-<script src="/ule/j/jquery.js"></script>
-<script src="/ule/j/uledev.js"></script>
+<script src="/ulecdn/j/jquery.js"></script>
+<script src="/ulecdn/j/uledev.js"></script>
 <script>
 	$(function(){
 

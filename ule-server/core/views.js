@@ -7,15 +7,15 @@ __app.use('/ule', require(pathWarp('/ule-server/routes/ule')));
 __app.use('/ule/util', require(pathWarp('/ule-server/routes/ule-util')));
 
 // 设置静态目录
-__app.use('/ule', __express.static(pathWarp('/ule-server/public')));
-__app.use('/ule/c', __express.static(pathWarp('/ule-server/public/c')));
-__app.use('/ule/j', __express.static(pathWarp('/ule-server/public/j')));
-__app.use('/ule/i', __express.static(pathWarp('/ule-server/public/i')));
-__app.use('/ule/o', __express.static(pathWarp('/ule-server/public/o')));
+__app.use('/ulecdn', __express.static(pathWarp('/ule-server/public')));
+__app.use('/ulecdn/c', __express.static(pathWarp('/ule-server/public/c')));
+__app.use('/ulecdn/j', __express.static(pathWarp('/ule-server/public/j')));
+__app.use('/ulecdn/i', __express.static(pathWarp('/ule-server/public/i')));
+__app.use('/ulecdn/o', __express.static(pathWarp('/ule-server/public/o')));
 
 
 function pathWarp(p){
-	return path.join(__modluePath, p);
+	return path.join(__installPath, p);
 }
 
 // 设置404跳转, 如果未被路由中间件找到的路径, 进入这里统一处理为 404
