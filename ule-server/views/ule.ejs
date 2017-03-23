@@ -1,94 +1,176 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>★<%= username %>★<%= title %>★</title>
-	<% include common/favicon.ejs %>
-	<link rel="stylesheet" href="/ulecdn/lib/h-ui/c/h-ui.min.css">
-	<style>
-		html, body { padding: 0; margin: 0; font: 12px "微软雅黑", "宋体";  }
-		body { overflow-y: auto; min-width: 1010px; padding: 0 20px; }
-		li { font-size: 12px; }
-		code { font-family: Consolas; color: #8B2323; padding: 0 15px; }
-		h1 i { vertical-align: middle; font-weight: bold; }
-		h1 span { font-size: 12px; color: #ccc; font-weight: normal; padding-left: 20px; }
-		table { border-collapse: collapse; }
-		table td { text-align: center; }
-		h6 { font-weight: bold; padding-left: 6px; }
-		.panel-body a { margin: 3px; }
-	</style>
+    <title>★<%= username %>★<%= title %>★</title>
+    <% include common/favicon.ejs %>
+    <!--[if !IE]><!-->
+    <link rel="stylesheet" href="/ulecdn/lib/h-ui/c/h-ui.min.css">
+    <style>
+        html, body{ padding:0; margin:0; font:12px "微软雅黑", "宋体"; }
+        body{ overflow-y:auto; min-width:1010px; padding:0 20px; }
+        li{ font-size:12px; }
+        code{ font-family:Consolas; color:#8B2323; padding:0 15px; }
+        table{ border-collapse:collapse; }
+        table td{ text-align:center; }
+        h6{ font-weight:bold; padding:0; margin:6px 0; border-bottom:dashed 1px tan; line-height:20px; }
+        .main-title{ padding:5px 0 10px; }
+        .main-title span:first-child{ vertical-align:middle; font-weight:bold; }
+        .main-title span:last-child{ font-size:12px; color:#ccc; font-weight:normal; padding-left:20px; }
+        .main{ }
+        .Huifold .item h4{ font-size:12px; padding:3px 6px; background-color:#5a98de; color:#fff; }
+        .Huifold .item h4 b{ float:left; position:static; font-size:16px; color:#d2edfa; }
+        .Huifold .item .info{ padding-bottom:20px; }
+    </style>
+    <!--<![endif]-->
 </head>
 <body>
-<h1><i>welcome to <a href="javascript:void(0);" class="explorer-link btn-link" path="<%= installPath %>"><%= title %></a> - <%= username %></i><span> 这里属于你自己的邮乐前端开发环境</span></h1>
-<hr>
-<div class="panel panel-primary mt-20">
-	<div class="panel-header">邮乐</div>
-	<div class="panel-body">
-		<a href="http://gr.uletm.com/pmdm/login.jsp" class="btn btn-warning radius size-MINI" target="_blank">GR</a>
-		<a href="http://beta.ule.com/wd/" class="btn btn-warning radius size-MINI" target="_blank">前端小组文档</a>
-		<a href="http://wiki.uletm.com/dashboard.action" class="btn btn-warning radius size-MINI" target="_blank">ULE Wiki</a>
-		<a href="http://tomauth.ule.cn/cas/login" class="btn btn-warning radius size-MINI" target="_blank">运营中心</a>
-		<a href="http://cs.ule.com/csadmin/user_security_check.do" class="btn btn-warning radius size-MINI" target="_blank">业务管理平台</a>
-		<a href="http://dm.uletm.com/dmv2/user!login.do" class="btn btn-warning radius size-MINI" target="_blank">系统发布平台</a>
-		<br>
-		<a href="http://cms.ulecn.tom.com/opencms/system/login/TomShopping/TomShopping-WD/" class="btn btn-warning radius size-MINI" target="_blank">Open CMS</a>
-		<a href="http://portal.baishancloud.com/account/index/login" class="btn btn-warning radius size-MINI" target="_blank">白云山缓存清理</a>
-		<a href="https://portal.chinanetcenter.com/cas/login?service=https%3A%2F%2Fsi.chinanetcenter.com%2Fr_sec_login" class="btn btn-warning radius size-MINI" target="_blank">新版CDN缓存</a>
-		<a href="https://portal.chinanetcenter.com/cas/login?service=http%3A%2F%2Fmyview.chinanetcenter.com%2Fr_sec_login#0" class="btn btn-warning radius size-MINI" target="_blank">旧版CDN缓存（作废）</a>
-		<br>
-		<a href="http://www.dev.ule.com/setting?type=ftp" class="btn btn-warning radius size-MINI" target="_blank">配置ftp</a>
-		<a href="http://www.dev.ule.com/setting?type=print" class="btn btn-warning radius size-MINI" target="_blank">配置打印机</a>
-		<a href="http://www.dev.ule.com/setting?type=upan" class="btn btn-warning radius size-MINI" target="_blank">配置共享盘</a>
-		<a href="http://www.dev.ule.com/setting?type=opencms" class="btn btn-warning radius size-MINI" target="_blank">配置Opencms</a>
-		<br>
-		<a href="http://www.dev.ule.com/event" class="btn btn-warning radius size-MINI" target="_blank">创建活动</a>
-		<a href="https://github.com/boat3471/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev Document</a>
-		<a href="https://www.npmjs.com/package/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev NPM</a>
-	</div>
-</div>
-<div class="panel panel-primary mt-20">
-	<div class="panel-header">工具</div>
-	<div class="panel-body">
-		<a href="#" class="btn btn-warning radius size-MINI" target="_blank">base64</a>
-		<a href="http://json.cn/" class="btn btn-warning radius size-MINI" target="_blank">JSON格式化</a>
-	</div>
-</div>
-<div class="panel panel-primary mt-20">
-	<div class="panel-header">库</div>
-	<div class="panel-body">
-		<h6>CSS</h6>
-		<a href="http://www.dev.com/ule/lib/css-optimize.html" class="btn btn-warning radius size-MINI" target="_blank">CSS 优化方案</a>
-		<a href="http://www.dev.com/ule/lib/css-reset.html" class="btn btn-warning radius size-MINI" target="_blank">css reset</a>
-		<a href="http://www.dev.com/ule/lib/css-function.html" class="btn btn-warning radius size-MINI" target="_blank">css function</a>
-		<a href="http://nec.netease.com/" class="btn btn-warning radius size-MINI" target="_blank">网易CSS方案</a>
-		<h6>UI</h6>
-		<a href="http://www.bootcss.com/p/flat-ui/" class="btn btn-warning radius size-MINI" target="_blank">Flat UI</a>
-		<a href="http://www.h-ui.net/index.shtml" class="btn btn-warning radius size-MINI" target="_blank">H-ui 官网</a>
-		<a href="http://www.dev.com/ule/lib/sh.html" class="btn btn-warning radius size-MINI" data-toggle="tooltip" data-placement="right" title="SyntaxHighlighter" target="_blank">代码高亮使用</a>
-		<h6>jQuery</h6>
-		<a href="http://jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery 官网</a>
-		<a href="http://api.jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api</a>
-		<a href="http://jquery.cuishifeng.cn/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api CN</a>
-		<a href="https://code.jquery.com/jquery/" class="btn btn-warning radius size-MINI" target="_blank">jQuery All Download</a>
-		<h6>Nodejs</h6>
-		<a href="http://nodejs.cn/" class="btn btn-warning radius size-MINI" target="_blank">Nodejs CN</a>
-	</div>
-</div>
-<div class="panel panel-primary mt-20">
-	<div class="panel-header">技术站</div>
-	<div class="panel-body">
-		<a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
-	</div>
+<!--[if !IE]><!-->
+<h1 class="main-title">
+    <span>welcome to <a href="javascript:void(0);" class="explorer-link btn-link" path="<%= installPath %>"><%= title %></a> - <%= username %></span>
+    <span> 这里属于你自己的邮乐前端开发环境</span>
+</h1>
+<ul id="Huifold3" class="Huifold">
+    <li class="item">
+        <h4 class="">我的项目<b>-</b></h4>
+        <div class="info" style="display:block;">
+            项目文件管理, 项目文件发布beta, 发布生产;<br>
+            在本地建立伪服务器帮助前端运行页面和调试页面;<br>
+            压缩css（gulp-minify-css）;<br>
+            js代码校验（gulp-jshint）;<br>
+            合并js文件（gulp-concat）;<br>
+            压缩js代码（gulp-uglify）;<br>
+            压缩图片（gulp-imagemin）;<br>
+            文件重命名 （gulp-rename）;<br>
+            自动刷新页面（gulp-livereload）;<br>
+            更改提醒（gulp-notify）;<br>
+            合并js顺序（gulp-order）;<br>
+            雪碧图合成（gulp-tmtsprite）;<br>
+        </div>
+    </li>
+    <li class="item">
+        <h4 class="">资源管理<b>-</b></h4>
+        <div class="info" style="display:block;">
+            GR编号 + 状态(进行中, 未开始, 已完成) + 任务名 + 平台(邮掌柜客户端, 邮掌柜APP, 邮助手等等) + WD人员 + PD人员 + PM人员 + UED人员 + UED地址
+            问题1. 如何实现局域网通信
+        </div>
+    </li>
+    <li class="item">
+        <h4 class="">邮乐<b>-</b></h4>
+        <div class="info" style="display:block;">
+            <h6>资源发布/缓存清理</h6>
+            <a href="http://cms.ulecn.tom.com/opencms/system/login/TomShopping/TomShopping-WD/" class="btn btn-warning radius size-MINI" target="_blank">Open CMS</a>
+            <a href="http://portal.baishancloud.com/account/index/login" class="btn btn-warning radius size-MINI" target="_blank">白云山缓存清理</a>
+            <a href="https://portal.chinanetcenter.com/cas/login?service=https%3A%2F%2Fsi.chinanetcenter.com%2Fr_sec_login" class="btn btn-warning radius size-MINI" target="_blank">新版CDN缓存</a>
+            <a href="https://portal.chinanetcenter.com/cas/login?service=http%3A%2F%2Fmyview.chinanetcenter.com%2Fr_sec_login#0" class="btn btn-warning radius size-MINI" target="_blank">旧版CDN缓存（作废）</a>
+            <h6>日常管理</h6>
+            <a href="http://gr.uletm.com/pmdm/login.jsp" class="btn btn-warning radius size-MINI" target="_blank">GR</a>
+            <a href="http://beta.ule.com/wd/" class="btn btn-warning radius size-MINI" target="_blank">前端小组文档</a>
+            <a href="http://wiki.uletm.com/dashboard.action" class="btn btn-warning radius size-MINI" target="_blank">ULE Wiki</a>
+            <a href="http://tomauth.ule.cn/cas/login" class="btn btn-warning radius size-MINI" target="_blank">运营中心</a>
+            <a href="http://cs.ule.com/csadmin/user_security_check.do" class="btn btn-warning radius size-MINI" target="_blank">业务管理平台</a>
+            <a href="http://dm.uletm.com/dmv2/user!login.do" class="btn btn-warning radius size-MINI" target="_blank">系统发布平台</a>
+            <h6>常用配置</h6>
+            <a href="http://www.dev.ule.com/setting?type=ftp" class="btn btn-warning radius size-MINI" target="_blank">配置ftp</a>
+            <a href="http://www.dev.ule.com/setting?type=print" class="btn btn-warning radius size-MINI" target="_blank">配置打印机</a>
+            <a href="http://www.dev.ule.com/setting?type=upan" class="btn btn-warning radius size-MINI" target="_blank">配置共享盘</a>
+            <a href="http://www.dev.ule.com/setting?type=opencms" class="btn btn-warning radius size-MINI" target="_blank">配置Opencms</a>
+            <h6>uledev 开发与使用</h6>
+            <a href="http://www.dev.ule.com/event" class="btn btn-warning radius size-MINI" target="_blank">创建活动</a>
+            <a href="https://github.com/boat3471/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev Document</a>
+            <a href="https://www.npmjs.com/package/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev NPM</a>
+        </div>
+    </li>
+    <li class="item">
+        <h4>工具<b>-</b></h4>
+        <div class="info" style="display:block;">
+            <a href="#" class="btn btn-warning radius size-MINI" target="_blank">base64</a>
+            <a href="http://json.cn/" class="btn btn-warning radius size-MINI" target="_blank">JSON格式化</a>
+            <h6>模块化开发</h6>
+            <a href="http://seajs.org/docs/#intro" class="btn btn-warning radius size-MINI" target="_blank">seajs</a>
+            <h6>第三方工具</h6>
+            <a href="http://underscorejs.org/" class="btn btn-warning radius size-MINI" target="_blank">underscore.js</a>
+            <a href="https://lodash.com/" class="btn btn-warning radius size-MINI" target="_blank">lodash</a>
+            <a href="http://danieltao.com/lazy.js/" class="btn btn-warning radius size-MINI" target="_blank">lazy.js</a>
+            <a href="http://momentjs.cn/" class="btn btn-warning radius size-MINI" target="_blank">momentjs</a>
+            <a href="http://www.bootcdn.cn/date-fns/" class="btn btn-warning radius size-MINI" target="_blank">date-fns</a>
+        </div>
+    </li>
+    <li class="item">
+        <h4>库<b>-</b></h4>
+        <div class="info" style="display:block;">
+            <h6>CSS</h6>
+            <a href="http://www.dev.com/ule/lib/css-optimize.html" class="btn btn-warning radius size-MINI" target="_blank">CSS 优化方案</a>
+            <a href="http://www.dev.com/ule/lib/css-reset.html" class="btn btn-warning radius size-MINI" target="_blank">css reset</a>
+            <a href="http://www.dev.com/ule/lib/css-function.html" class="btn btn-warning radius size-MINI" target="_blank">css function</a>
+            <a href="http://nec.netease.com/" class="btn btn-warning radius size-MINI" target="_blank">网易CSS方案</a>
+            <h6>UI</h6>
+            <a href="http://www.bootcss.com/p/flat-ui/" class="btn btn-warning radius size-MINI" target="_blank">Flat UI</a>
+            <a href="http://www.h-ui.net/index.shtml" class="btn btn-warning radius size-MINI" target="_blank">H-ui 官网</a>
+            <a href="http://www.dev.com/ule/lib/sh.html" class="btn btn-warning radius size-MINI" data-toggle="tooltip" data-placement="right" title="SyntaxHighlighter" target="_blank">代码高亮使用</a>
+            <h6>jQuery</h6>
+            <a href="http://jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery 官网</a>
+            <a href="http://api.jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api</a>
+            <a href="http://jquery.cuishifeng.cn/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api CN</a>
+            <a href="https://code.jquery.com/jquery/" class="btn btn-warning radius size-MINI" target="_blank">jQuery All Download</a>
+            <h6>Nodejs</h6>
+            <a href="http://nodejs.cn/" class="btn btn-warning radius size-MINI" target="_blank">Nodejs CN</a>
+            <h6>动效库</h6>
+            <a href="http://greensock.com/tweenlite" class="btn btn-warning radius size-MINI" target="_blank">GreenSock-TweenLite（需翻墙）</a>
+            <a href="http://ricostacruz.com/jquery.transit/" class="btn btn-warning radius size-MINI" target="_blank">jQuery.Transit</a>
+            <a href="http://paperjs.org/" class="btn btn-warning radius size-MINI" target="_blank">Paper.js</a>
+            <a href="http://visionmedia.github.io/move.js/" class="btn btn-warning radius size-MINI" target="_blank">Move.js</a>
+            <a href="http://leaverou.github.io/animatable/" class="btn btn-warning radius size-MINI" target="_blank">animatable</a>
+            <a href="http://www.createjs.com/" class="btn btn-warning radius size-MINI" target="_blank">Createjs</a>
+        </div>
+    </li>
+    <li class="item">
+        <h4>技术站<b>-</b></h4>
+        <div class="info" style="display:block;">
+            <a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
+        </div>
+    </li>
+</ul>
+<script src="/ulecdn/j/jquery.js"></script>
+<script src="/ulecdn/j/uledev.js"></script>
+<script src="/ulecdn/lib/h-ui/j/h-ui.min.js"></script>
+<script>
+	$(function(){
+		$("[data-toggle='tooltip']").tooltip();
+
+		$.Huifold("#Huifold3 .item h4", "#Huifold3 .item .info", "fast", 3, "click");
+
+	});
+</script>
+<!--<![endif]-->
+<!--[if lte IE 9]>
+    浏览器版本过低
+<![endif]-->
+</body>
+</html>
+<div style="display:none;">
+    html判断IE版本
+    1. <!--[if !IE]><!--> 除IE外都可识别 <!--<![endif]-->
+    2. <!--[if IE]> 所有的IE可识别 <![endif]-->
+    3. <!--[if IE 5.0]> 只有IE5.0可以识别 <![endif]-->
+    4. <!--[if IE 5]> 仅IE5.0与IE5.5可以识别 <![endif]-->
+    5. <!--[if gt IE 5.0]> IE5.0以及IE5.0以上版本都可以识别 <![endif]-->
+    6. <!--[if IE 6]> 仅IE6可识别 <![endif]-->
+    7. <!--[if lt IE 6]> IE6以及IE6以下版本可识别 <![endif]-->
+    8. <!--[if gte IE 6]> IE6以及IE6以上版本可识别 <![endif]-->
+    9. <!--[if IE 7]> 仅IE7可识别 <![endif]-->
+    10. <!--[if lt IE 7]> IE7以及IE7以下版本可识别 <![endif]-->
+    11. <!--[if gte IE 7]> IE7以及IE7以上版本可识别 <![endif]-->
 </div>
 <!--<h2>如何创建邮乐活动？</h2>-->
 <!--<ol>-->
-	<!--<li>安装Git, 如何安装请自行查阅资料</li>-->
-	<!--<li>安装Node.js, 如何安装请自行查阅资料</li>-->
-	<!--<li>全局安装 uledev, 命令: <code>npm install -g uledev</code></li>-->
-	<!--<li>创建个人活动开发目录</li>-->
-	<!--<li>执行初始化命令: <code>uledev event init</code></li>-->
-	<!--<li>执行创建命令: <code>uledev event</code></li>-->
-	<!--<li>按照命令行提示输入指定内容</li>-->
-	<!--<li>示例: <br><img src="/ulecdn/i/event-demo.png" alt=""></li>-->
+<!--<li>安装Git, 如何安装请自行查阅资料</li>-->
+<!--<li>安装Node.js, 如何安装请自行查阅资料</li>-->
+<!--<li>全局安装 uledev, 命令: <code>npm install -g uledev</code></li>-->
+<!--<li>创建个人活动开发目录</li>-->
+<!--<li>执行初始化命令: <code>uledev event init</code></li>-->
+<!--<li>执行创建命令: <code>uledev event</code></li>-->
+<!--<li>按照命令行提示输入指定内容</li>-->
+<!--<li>示例: <br><img src="/ulecdn/i/event-demo.png" alt=""></li>-->
 <!--</ol>-->
 <!--<a href="http://www.infoq.com/cn/articles/front-end-engineering-and-performance-optimization-part1"><h2>静态资源版本更新与缓存?</h2></a>-->
 <!--<a href="http://www.infoq.com/cn/articles/front-end-engineering-and-performance-optimization-part2"><h2>静态资源管理与模板框架?</h2></a>-->
@@ -96,13 +178,3 @@
 <!--<a href="http://fis.baidu.com/"><h2>百度前端构建工具</h2></a>-->
 <!--<h2>旧版CDN缓存用户名：tom_mv2  密码：tom_purge123</h2>-->
 <!--<h2>白云山CDN缓存 ule_wd/Wd20161117</h2>-->
-<script src="/ulecdn/j/jquery.js"></script>
-<script src="/ulecdn/j/uledev.js"></script>
-<script src="/ulecdn/lib/h-ui/j/h-ui.min.js"></script>
-<script>
-	$(function(){
-		$("[data-toggle='tooltip']").tooltip();
-	});
-</script>
-</body>
-</html>
