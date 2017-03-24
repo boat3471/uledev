@@ -8,16 +8,19 @@ var config = uledev.config;
 
 /* home page. */
 router.get('/', function(req, res, next){
-	log('enter uledev home');
-	res.render('ule', {
-		title: 'uledev',
-		username: config.username,
-		installPath: config.dir.installPath
-	});
+	var host = req.headers.host;
+	if(host === 'www.uledev.com')
+		res.render('my.ejs', {
+			title: 'uledev',
+			username: config.username,
+			installPath: config.dir.installPath
+		});
+	else
+		res.redirect('//www.uledev.com/404');
 });
 
 /* GET event page. */
-router.get('/event', function(req, res, next){
+router.get('/event.ejs', function(req, res, next){
 	var uledeveEventDate = uledev.getUledevEventData();
 	res.render('event', {configData: uledeveEventDate});
 });

@@ -4,7 +4,7 @@
     <title>★<%= username %>★<%= title %>★</title>
     <% include common/favicon.ejs %>
     <!--[if !IE]><!-->
-    <link rel="stylesheet" href="/ulecdn/lib/h-ui/c/h-ui.min.css">
+    <link rel="stylesheet" href="/lib/hui/c/hui.css">
     <style>
         html, body{ padding:0; margin:0; font:12px "微软雅黑", "宋体"; }
         body{ overflow-y:auto; min-width:1010px; padding:0 20px; }
@@ -31,8 +31,8 @@
 </h1>
 <ul id="Huifold3" class="Huifold">
     <li class="item">
-        <h4 class="">我的项目<b>-</b></h4>
-        <div class="info" style="display:block;">
+        <h4 class="">我的项目<b>+</b></h4>
+        <div class="info" style="display:none;">
             项目文件管理, 项目文件发布beta, 发布生产;<br>
             在本地建立伪服务器帮助前端运行页面和调试页面;<br>
             压缩css（gulp-minify-css）;<br>
@@ -48,8 +48,8 @@
         </div>
     </li>
     <li class="item">
-        <h4 class="">资源管理<b>-</b></h4>
-        <div class="info" style="display:block;">
+        <h4 class="">资源管理<b>+</b></h4>
+        <div class="info" style="display:none;">
             GR编号 + 状态(进行中, 未开始, 已完成) + 任务名 + 平台(邮掌柜客户端, 邮掌柜APP, 邮助手等等) + WD人员 + PD人员 + PM人员 + UED人员 + UED地址
             问题1. 如何实现局域网通信
         </div>
@@ -70,19 +70,19 @@
             <a href="http://cs.ule.com/csadmin/user_security_check.do" class="btn btn-warning radius size-MINI" target="_blank">业务管理平台</a>
             <a href="http://dm.uletm.com/dmv2/user!login.do" class="btn btn-warning radius size-MINI" target="_blank">系统发布平台</a>
             <h6>常用配置</h6>
-            <a href="http://www.dev.ule.com/setting?type=ftp" class="btn btn-warning radius size-MINI" target="_blank">配置ftp</a>
-            <a href="http://www.dev.ule.com/setting?type=print" class="btn btn-warning radius size-MINI" target="_blank">配置打印机</a>
-            <a href="http://www.dev.ule.com/setting?type=upan" class="btn btn-warning radius size-MINI" target="_blank">配置共享盘</a>
-            <a href="http://www.dev.ule.com/setting?type=opencms" class="btn btn-warning radius size-MINI" target="_blank">配置Opencms</a>
+            <a href="http://www.uledev.com/setting?type=ftp" class="btn btn-warning radius size-MINI" target="_blank">配置ftp</a>
+            <a href="http://www.uledev.com/setting?type=print" class="btn btn-warning radius size-MINI" target="_blank">配置打印机</a>
+            <a href="http://www.uledev.com/setting?type=upan" class="btn btn-warning radius size-MINI" target="_blank">配置共享盘</a>
+            <a href="http://www.uledev.com/setting?type=opencms" class="btn btn-warning radius size-MINI" target="_blank">配置Opencms</a>
             <h6>uledev 开发与使用</h6>
-            <a href="http://www.dev.ule.com/event" class="btn btn-warning radius size-MINI" target="_blank">创建活动</a>
-            <a href="https://github.com/boat3471/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev Document</a>
+            <a href="http://www.uledev.com/event" class="btn btn-warning radius size-MINI" target="_blank">创建活动</a>
+            <a href="https://github.com/boat3471/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev Github</a>
             <a href="https://www.npmjs.com/package/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev NPM</a>
         </div>
     </li>
     <li class="item">
-        <h4>工具<b>-</b></h4>
-        <div class="info" style="display:block;">
+        <h4>工具<b>+</b></h4>
+        <div class="info" style="display:none;">
             <a href="#" class="btn btn-warning radius size-MINI" target="_blank">base64</a>
             <a href="http://json.cn/" class="btn btn-warning radius size-MINI" target="_blank">JSON格式化</a>
             <h6>模块化开发</h6>
@@ -96,17 +96,17 @@
         </div>
     </li>
     <li class="item">
-        <h4>库<b>-</b></h4>
-        <div class="info" style="display:block;">
+        <h4>库<b>+</b></h4>
+        <div class="info" style="display:none;">
             <h6>CSS</h6>
-            <a href="http://www.dev.com/ule/lib/css-optimize.html" class="btn btn-warning radius size-MINI" target="_blank">CSS 优化方案</a>
-            <a href="http://www.dev.com/ule/lib/css-reset.html" class="btn btn-warning radius size-MINI" target="_blank">css reset</a>
-            <a href="http://www.dev.com/ule/lib/css-function.html" class="btn btn-warning radius size-MINI" target="_blank">css function</a>
+            <a href="http://www.uledev.com/h/lib/css-optimize.html" class="btn btn-warning radius size-MINI" target="_blank">CSS 优化方案</a>
+            <a href="http://www.uledev.com/h/lib/css-reset.html" class="btn btn-warning radius size-MINI" target="_blank">css reset</a>
+            <a href="http://www.uledev.com/h/lib/css-function.html" class="btn btn-warning radius size-MINI" target="_blank">css function</a>
             <a href="http://nec.netease.com/" class="btn btn-warning radius size-MINI" target="_blank">网易CSS方案</a>
             <h6>UI</h6>
             <a href="http://www.bootcss.com/p/flat-ui/" class="btn btn-warning radius size-MINI" target="_blank">Flat UI</a>
             <a href="http://www.h-ui.net/index.shtml" class="btn btn-warning radius size-MINI" target="_blank">H-ui 官网</a>
-            <a href="http://www.dev.com/ule/lib/sh.html" class="btn btn-warning radius size-MINI" data-toggle="tooltip" data-placement="right" title="SyntaxHighlighter" target="_blank">代码高亮使用</a>
+            <a href="http://www.uledev.com/h/lib/sh.html" class="btn btn-warning radius size-MINI" data-toggle="tooltip" data-placement="right" title="SyntaxHighlighter" target="_blank">代码高亮使用</a>
             <h6>jQuery</h6>
             <a href="http://jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery 官网</a>
             <a href="http://api.jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api</a>
@@ -124,42 +124,39 @@
         </div>
     </li>
     <li class="item">
-        <h4>技术站<b>-</b></h4>
-        <div class="info" style="display:block;">
+        <h4>技术站<b>+</b></h4>
+        <div class="info" style="display:none;">
+            <a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
+        </div>
+    </li>
+    <li class="item">
+        <h4>其他<b>+</b></h4>
+        <div class="info" style="display:none;">
             <a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
         </div>
     </li>
 </ul>
-<script src="/ulecdn/j/jquery.js"></script>
-<script src="/ulecdn/j/uledev.js"></script>
-<script src="/ulecdn/lib/h-ui/j/h-ui.min.js"></script>
+
+<script src="/m/sea.js"></script>
 <script>
-	$(function(){
-		$("[data-toggle='tooltip']").tooltip();
-
-		$.Huifold("#Huifold3 .item h4", "#Huifold3 .item .info", "fast", 3, "click");
-
-	});
+    seajs.use('/j/my');
+</script>
+<script>
+//	$(function(){
+//		$("[data-toggle='tooltip']").tooltip();
+//
+//		$.Huifold("#Huifold3 .item h4", "#Huifold3 .item .info", "fast", 3, "click");
+//
+//	});
 </script>
 <!--<![endif]-->
 <!--[if lte IE 9]>
-    浏览器版本过低
+<h1 style="text-align:center;">浏览器版本过低</h1>
 <![endif]-->
 </body>
 </html>
 <div style="display:none;">
     html判断IE版本
-    1. <!--[if !IE]><!--> 除IE外都可识别 <!--<![endif]-->
-    2. <!--[if IE]> 所有的IE可识别 <![endif]-->
-    3. <!--[if IE 5.0]> 只有IE5.0可以识别 <![endif]-->
-    4. <!--[if IE 5]> 仅IE5.0与IE5.5可以识别 <![endif]-->
-    5. <!--[if gt IE 5.0]> IE5.0以及IE5.0以上版本都可以识别 <![endif]-->
-    6. <!--[if IE 6]> 仅IE6可识别 <![endif]-->
-    7. <!--[if lt IE 6]> IE6以及IE6以下版本可识别 <![endif]-->
-    8. <!--[if gte IE 6]> IE6以及IE6以上版本可识别 <![endif]-->
-    9. <!--[if IE 7]> 仅IE7可识别 <![endif]-->
-    10. <!--[if lt IE 7]> IE7以及IE7以下版本可识别 <![endif]-->
-    11. <!--[if gte IE 7]> IE7以及IE7以上版本可识别 <![endif]-->
 </div>
 <!--<h2>如何创建邮乐活动？</h2>-->
 <!--<ol>-->

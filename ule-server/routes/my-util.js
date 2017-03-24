@@ -9,7 +9,7 @@ var config = uledev.config;
 /* util home page. */
 router.get('/', function(req, res, next){
 	log('enter util home');
-	res.render('ule', {
+	res.render('util', {
 		title: 'uledev',
 		username: config.username,
 		installPath: config.dir.installPath
