@@ -3,20 +3,32 @@ var url = require('url');
 var router = __express.Router();
 var formidable = require('formidable');
 var cmd = require('child_process');
+var marked = require('marked');
 
 var config = uledev.config;
 
 /* home page. */
 router.get('/', function(req, res, next){
 	var host = req.headers.host;
-	if(host === 'www.uledev.com')
-		res.render('my.ejs', {
+	var articles = require('../../-static-/h/articles/map.json');
+	// if(host === 'www.uledev.com')
+		res.render('index.ejs', {
 			title: 'uledev',
 			username: config.username,
-			installPath: config.dir.installPath
+			installPath: config.dir.installPath,
+			articles: articles
 		});
-	else
-		res.redirect('//www.uledev.com/404');
+	// else
+	// 	res.redirect('//www.uledev.com/404');
+});
+
+router.get('/md', function(req, res, next) {
+	var base = config.dir.serverPath;
+	fs.readFile(base + '/-static-/md/1.md', function(err, data) {
+		var html = marked(data.toString());
+		//res.render('markdown.ejs', {mdContent: html});
+		res.send(html);
+	});
 });
 
 /* GET event page. */

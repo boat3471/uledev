@@ -20,6 +20,13 @@
         .Huifold .item h4{ font-size:12px; padding:3px 6px; background-color:#5a98de; color:#fff; }
         .Huifold .item h4 b{ float:left; position:static; font-size:16px; color:#d2edfa; }
         .Huifold .item .info{ padding-bottom:20px; }
+        .modal-dialog{ width:400px; }
+        .modal-header{ padding:8px 15px; }
+        .modal-header .close{ top:12px; }
+        .modal-body input{ margin:8px 0; }
+        .modal-body input[type=submit]{ width:100%; }
+        .modal-body > form > div{ position:relative; }
+        label.error{ position:relative; float:right; top:auto; right:auto; }
     </style>
     <!--<![endif]-->
 </head>
@@ -63,7 +70,7 @@
             <a href="https://portal.chinanetcenter.com/cas/login?service=https%3A%2F%2Fsi.chinanetcenter.com%2Fr_sec_login" class="btn btn-warning radius size-MINI" target="_blank">新版CDN缓存</a>
             <a href="https://portal.chinanetcenter.com/cas/login?service=http%3A%2F%2Fmyview.chinanetcenter.com%2Fr_sec_login#0" class="btn btn-warning radius size-MINI" target="_blank">旧版CDN缓存（作废）</a>
             <h6>日常管理</h6>
-            <a href="http://gr.uletm.com/pmdm/login.jsp" class="btn btn-warning radius size-MINI" target="_blank">GR</a>
+            <a href-o="http://gr.uletm.com/pmdm/login.jsp" id="linkGR" class="btn btn-warning radius size-MINI" target="_blank">GR</a>
             <a href="http://beta.ule.com/wd/" class="btn btn-warning radius size-MINI" target="_blank">前端小组文档</a>
             <a href="http://wiki.uletm.com/dashboard.action" class="btn btn-warning radius size-MINI" target="_blank">ULE Wiki</a>
             <a href="http://tomauth.ule.cn/cas/login" class="btn btn-warning radius size-MINI" target="_blank">运营中心</a>
@@ -135,19 +142,38 @@
             <a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
         </div>
     </li>
+    <li class="item">
+        <h4>文章<b>+</b></h4>
+        <div class="info" style="display:none;">
+            <% articles.forEach(function(item){ %>
+            <a href="<%= item.url %>" class="btn btn-warning radius size-MINI" target="_blank"><%= item.name %></a>
+            <% }); %>
+        </div>
+    </li>
 </ul>
+<!-- 登录模块 -->
+<div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content radius">
+            <div class="modal-header">
+                <h3 class="modal-title">WD登录</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void(0);">×</a>
+            </div>
+            <div class="modal-body">
+                <form id="formLogin" method="get" action="">
+                    <div><input id="loginname" name="loginname" type="text" required minlength="6" placeholder="用户名" class="input-text radius size-M"></div>
+                    <div><input id="password" name="password" type="password" required minlength="6" placeholder="密码" class="input-text radius size-M"></div>
+                    <input class="btn btn-primary radius" type="submit" value="登录">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="/m/sea.js"></script>
+<script>seajs.use('/j/index');</script>
 <script>
-    seajs.use('/j/my');
-</script>
-<script>
-//	$(function(){
-//		$("[data-toggle='tooltip']").tooltip();
-//
-//		$.Huifold("#Huifold3 .item h4", "#Huifold3 .item .info", "fast", 3, "click");
-//
-//	});
 </script>
 <!--<![endif]-->
 <!--[if lte IE 9]>

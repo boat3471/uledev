@@ -1,19 +1,22 @@
 var path = require('path');
+
 // 设置视图引擎
-__app.set('views', pathWarp('/ule-server/views'));
+__app.set('views', pathWarp('/ule-server/-views-'));
 __app.set('view engine', 'ejs');
-__app.use('/', require(pathWarp('/ule-server/routes/index')));
-__app.use('/my', require(pathWarp('/ule-server/routes/my')));
-__app.use('/util', require(pathWarp('/ule-server/routes/my-util')));
+
+// 设置路由
+__app.use('/', require(pathWarp('/ule-server/core/routes/root')));
+__app.use('/my', require(pathWarp('/ule-server/core/routes/my-home')));
+__app.use('/util', require(pathWarp('/ule-server/core/routes/my-util')));
 
 // 设置静态目录
-__app.use('/h', __express.static(pathWarp('/ule-server/www')));
-__app.use('/c', __express.static(pathWarp('/ule-server/public/c')));
-__app.use('/j', __express.static(pathWarp('/ule-server/public/j')));
-__app.use('/i', __express.static(pathWarp('/ule-server/public/i')));
-__app.use('/o', __express.static(pathWarp('/ule-server/public/o')));
-__app.use('/lib', __express.static(pathWarp('/ule-server/public/lib')));
-__app.use('/m', __express.static(pathWarp('/ule-server/public/modules')));
+__app.use('/h', __express.static(pathWarp('/ule-server/-static-/h')));
+__app.use('/c', __express.static(pathWarp('/ule-server/-static-/c')));
+__app.use('/j', __express.static(pathWarp('/ule-server/-static-/j')));
+__app.use('/i', __express.static(pathWarp('/ule-server/-static-/i')));
+__app.use('/o', __express.static(pathWarp('/ule-server/-static-/o')));
+__app.use('/lib', __express.static(pathWarp('/ule-server/-static-/lib')));
+__app.use('/m', __express.static(pathWarp('/ule-server/-static-/modules')));
 
 
 // 设置404跳转, 如果未被路由中间件找到的路径, 进入这里统一处理为 404

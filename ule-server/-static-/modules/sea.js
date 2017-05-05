@@ -6,6 +6,7 @@ seajs.config({
 	base: '/m/',
 	alias: {
 		'jquery': 'jquery.js',
+		'jquery_validate': 'jquery.validate.min.js',
 		'uledev': 'uledev.js',
 		'hui': 'hui.js'
 	}
