@@ -5,152 +5,129 @@
     <% include common/favicon.ejs %>
     <!--[if !IE]><!-->
     <link rel="stylesheet" href="/lib/hui/c/hui.css">
-    <style>
-        html, body{ padding:0; margin:0; font:12px "微软雅黑", "宋体"; }
-        body{ overflow-y:auto; min-width:1010px; padding:0 20px; }
-        li{ font-size:12px; }
-        code{ font-family:Consolas; color:#8B2323; padding:0 15px; }
-        table{ border-collapse:collapse; }
-        table td{ text-align:center; }
-        h6{ font-weight:bold; padding:0; margin:6px 0; border-bottom:dashed 1px tan; line-height:20px; }
-        .main-title{ padding:5px 0 10px; }
-        .main-title span:first-child{ vertical-align:middle; font-weight:bold; }
-        .main-title span:last-child{ font-size:12px; color:#ccc; font-weight:normal; padding-left:20px; }
-        .main{ }
-        .Huifold .item h4{ font-size:12px; padding:3px 6px; background-color:#5a98de; color:#fff; }
-        .Huifold .item h4 b{ float:left; position:static; font-size:16px; color:#d2edfa; }
-        .Huifold .item .info{ padding-bottom:20px; }
-        .modal-dialog{ width:400px; }
-        .modal-header{ padding:8px 15px; }
-        .modal-header .close{ top:12px; }
-        .modal-body input{ margin:8px 0; }
-        .modal-body input[type=submit]{ width:100%; }
-        .modal-body > form > div{ position:relative; }
-        label.error{ position:relative; float:right; top:auto; right:auto; }
-    </style>
+    <link rel="stylesheet" href="/c/index.css">
     <!--<![endif]-->
 </head>
 <body>
 <!--[if !IE]><!-->
-<h1 class="main-title">
+<h1 class="main-title" style="font-size: 28px;">
     <span>welcome to <a href="javascript:void(0);" class="explorer-link btn-link" path="<%= installPath %>"><%= title %></a> - <%= username %></span>
     <span> 这里属于你自己的邮乐前端开发环境</span>
 </h1>
-<ul id="Huifold3" class="Huifold">
-    <li class="item">
-        <h4 class="">我的项目<b>+</b></h4>
-        <div class="info" style="display:none;">
-            项目文件管理, 项目文件发布beta, 发布生产;<br>
-            在本地建立伪服务器帮助前端运行页面和调试页面;<br>
-            压缩css（gulp-minify-css）;<br>
-            js代码校验（gulp-jshint）;<br>
-            合并js文件（gulp-concat）;<br>
-            压缩js代码（gulp-uglify）;<br>
-            压缩图片（gulp-imagemin）;<br>
-            文件重命名 （gulp-rename）;<br>
-            自动刷新页面（gulp-livereload）;<br>
-            更改提醒（gulp-notify）;<br>
-            合并js顺序（gulp-order）;<br>
-            雪碧图合成（gulp-tmtsprite）;<br>
+
+<header class="navbar-wrapper">
+    <div class="navbar navbar-black">
+        <div class="container cl">
+            <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+            <nav class="nav navbar-nav nav-collapse" role="navigation" id="Hui-navbar">
+                <ul id="nav" class="cl">
+                    <li class="current"><a href="#">项目</a></li>
+                    <li><a href="#">资源管理</a></li>
+                    <li><a href="#">日志</a></li>
+                    <li><a href="#">邮乐</a></li>
+                    <li><a href="#">技术栈</a></li>
+                    <li><a href="#">文章</a></li>
+                </ul>
+            </nav>
         </div>
-    </li>
-    <li class="item">
-        <h4 class="">资源管理<b>+</b></h4>
-        <div class="info" style="display:none;">
-            GR编号 + 状态(进行中, 未开始, 已完成) + 任务名 + 平台(邮掌柜客户端, 邮掌柜APP, 邮助手等等) + WD人员 + PD人员 + PM人员 + UED人员 + UED地址
-            问题1. 如何实现局域网通信
-        </div>
-    </li>
-    <li class="item">
-        <h4 class="">邮乐<b>-</b></h4>
-        <div class="info" style="display:block;">
-            <h6>资源发布/缓存清理</h6>
-            <a href="http://cms.ulecn.tom.com/opencms/system/login/TomShopping/TomShopping-WD/" class="btn btn-warning radius size-MINI" target="_blank">Open CMS</a>
-            <a href="http://portal.baishancloud.com/account/index/login" class="btn btn-warning radius size-MINI" target="_blank">白云山缓存清理</a>
-            <a href="https://portal.chinanetcenter.com/cas/login?service=https%3A%2F%2Fsi.chinanetcenter.com%2Fr_sec_login" class="btn btn-warning radius size-MINI" target="_blank">新版CDN缓存</a>
-            <a href="https://portal.chinanetcenter.com/cas/login?service=http%3A%2F%2Fmyview.chinanetcenter.com%2Fr_sec_login#0" class="btn btn-warning radius size-MINI" target="_blank">旧版CDN缓存（作废）</a>
-            <h6>日常管理</h6>
-            <a href-o="http://gr.uletm.com/pmdm/login.jsp" id="linkGR" class="btn btn-warning radius size-MINI" target="_blank">GR</a>
-            <a href="http://beta.ule.com/wd/" class="btn btn-warning radius size-MINI" target="_blank">前端小组文档</a>
-            <a href="http://wiki.uletm.com/dashboard.action" class="btn btn-warning radius size-MINI" target="_blank">ULE Wiki</a>
-            <a href="http://tomauth.ule.cn/cas/login" class="btn btn-warning radius size-MINI" target="_blank">运营中心</a>
-            <a href="http://cs.ule.com/csadmin/user_security_check.do" class="btn btn-warning radius size-MINI" target="_blank">业务管理平台</a>
-            <a href="http://dm.uletm.com/dmv2/user!login.do" class="btn btn-warning radius size-MINI" target="_blank">系统发布平台</a>
-            <h6>常用配置</h6>
-            <a href="http://www.uledev.com/setting?type=ftp" class="btn btn-warning radius size-MINI" target="_blank">配置ftp</a>
-            <a href="http://www.uledev.com/setting?type=print" class="btn btn-warning radius size-MINI" target="_blank">配置打印机</a>
-            <a href="http://www.uledev.com/setting?type=upan" class="btn btn-warning radius size-MINI" target="_blank">配置共享盘</a>
-            <a href="http://www.uledev.com/setting?type=opencms" class="btn btn-warning radius size-MINI" target="_blank">配置Opencms</a>
-            <h6>uledev 开发与使用</h6>
-            <a href="http://www.uledev.com/event" class="btn btn-warning radius size-MINI" target="_blank">创建活动</a>
-            <a href="https://github.com/boat3471/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev Github</a>
-            <a href="https://www.npmjs.com/package/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev NPM</a>
-        </div>
-    </li>
-    <li class="item">
-        <h4>工具<b>+</b></h4>
-        <div class="info" style="display:none;">
-            <a href="#" class="btn btn-warning radius size-MINI" target="_blank">base64</a>
-            <a href="http://json.cn/" class="btn btn-warning radius size-MINI" target="_blank">JSON格式化</a>
-            <h6>模块化开发</h6>
-            <a href="http://seajs.org/docs/#intro" class="btn btn-warning radius size-MINI" target="_blank">seajs</a>
-            <h6>第三方工具</h6>
-            <a href="http://underscorejs.org/" class="btn btn-warning radius size-MINI" target="_blank">underscore.js</a>
-            <a href="https://lodash.com/" class="btn btn-warning radius size-MINI" target="_blank">lodash</a>
-            <a href="http://danieltao.com/lazy.js/" class="btn btn-warning radius size-MINI" target="_blank">lazy.js</a>
-            <a href="http://momentjs.cn/" class="btn btn-warning radius size-MINI" target="_blank">momentjs</a>
-            <a href="http://www.bootcdn.cn/date-fns/" class="btn btn-warning radius size-MINI" target="_blank">date-fns</a>
-        </div>
-    </li>
-    <li class="item">
-        <h4>库<b>+</b></h4>
-        <div class="info" style="display:none;">
-            <h6>CSS</h6>
-            <a href="http://www.uledev.com/h/lib/css-optimize.html" class="btn btn-warning radius size-MINI" target="_blank">CSS 优化方案</a>
-            <a href="http://www.uledev.com/h/lib/css-reset.html" class="btn btn-warning radius size-MINI" target="_blank">css reset</a>
-            <a href="http://www.uledev.com/h/lib/css-function.html" class="btn btn-warning radius size-MINI" target="_blank">css function</a>
-            <a href="http://nec.netease.com/" class="btn btn-warning radius size-MINI" target="_blank">网易CSS方案</a>
-            <h6>UI</h6>
-            <a href="http://www.bootcss.com/p/flat-ui/" class="btn btn-warning radius size-MINI" target="_blank">Flat UI</a>
-            <a href="http://www.h-ui.net/index.shtml" class="btn btn-warning radius size-MINI" target="_blank">H-ui 官网</a>
-            <a href="http://www.uledev.com/h/lib/sh.html" class="btn btn-warning radius size-MINI" data-toggle="tooltip" data-placement="right" title="SyntaxHighlighter" target="_blank">代码高亮使用</a>
-            <h6>jQuery</h6>
-            <a href="http://jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery 官网</a>
-            <a href="http://api.jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api</a>
-            <a href="http://jquery.cuishifeng.cn/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api CN</a>
-            <a href="https://code.jquery.com/jquery/" class="btn btn-warning radius size-MINI" target="_blank">jQuery All Download</a>
-            <h6>Nodejs</h6>
-            <a href="http://nodejs.cn/" class="btn btn-warning radius size-MINI" target="_blank">Nodejs CN</a>
-            <h6>动效库</h6>
-            <a href="http://greensock.com/tweenlite" class="btn btn-warning radius size-MINI" target="_blank">GreenSock-TweenLite（需翻墙）</a>
-            <a href="http://ricostacruz.com/jquery.transit/" class="btn btn-warning radius size-MINI" target="_blank">jQuery.Transit</a>
-            <a href="http://paperjs.org/" class="btn btn-warning radius size-MINI" target="_blank">Paper.js</a>
-            <a href="http://visionmedia.github.io/move.js/" class="btn btn-warning radius size-MINI" target="_blank">Move.js</a>
-            <a href="http://leaverou.github.io/animatable/" class="btn btn-warning radius size-MINI" target="_blank">animatable</a>
-            <a href="http://www.createjs.com/" class="btn btn-warning radius size-MINI" target="_blank">Createjs</a>
-        </div>
-    </li>
-    <li class="item">
-        <h4>技术站<b>+</b></h4>
-        <div class="info" style="display:none;">
-            <a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
-        </div>
-    </li>
-    <li class="item">
-        <h4>其他<b>+</b></h4>
-        <div class="info" style="display:none;">
-            <a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
-        </div>
-    </li>
-    <li class="item">
-        <h4>文章<b>+</b></h4>
-        <div class="info" style="display:none;">
-            <% articles.forEach(function(item){ %>
-            <a href="<%= item.url %>" class="btn btn-warning radius size-MINI" target="_blank"><%= item.name %></a>
-            <% }); %>
-        </div>
-    </li>
-</ul>
+    </div>
+</header>
+
+<div class="info">
+    项目文件管理, 项目文件发布beta, 发布生产;<br>
+    在本地建立伪服务器帮助前端运行页面和调试页面;<br>
+    压缩css（gulp-minify-css）;<br>
+    js代码校验（gulp-jshint）;<br>
+    合并js文件（gulp-concat）;<br>
+    压缩js代码（gulp-uglify）;<br>
+    压缩图片（gulp-imagemin）;<br>
+    文件重命名 （gulp-rename）;<br>
+    自动刷新页面（gulp-livereload）;<br>
+    更改提醒（gulp-notify）;<br>
+    合并js顺序（gulp-order）;<br>
+    雪碧图合成（gulp-tmtsprite）;<br>
+</div>
+
+<div class="info hide">
+    GR编号 + 状态(进行中, 未开始, 已完成) + 任务名 + 平台(邮掌柜客户端, 邮掌柜APP, 邮助手等等) + WD人员 + PD人员 + PM人员 + UED人员 + UED地址
+    问题1. 如何实现局域网通信
+</div>
+
+<div class="info hide">
+    在这里可以建立个人的日志信息, 可以做成想小米便签一样的形式, 记录日常开发信息, 项目信息, 接口信息,
+    例如:
+</div>
+
+<div class="info hide">
+    <h6>资源发布/缓存清理</h6>
+    <a href="http://cms.ulecn.tom.com/opencms/system/login/TomShopping/TomShopping-WD/" class="btn btn-warning radius size-MINI" target="_blank">Open CMS</a>
+    <a href="http://portal.baishancloud.com/account/index/login" class="btn btn-warning radius size-MINI" target="_blank">白云山缓存清理</a>
+    <a href="https://portal.chinanetcenter.com/cas/login?service=https%3A%2F%2Fsi.chinanetcenter.com%2Fr_sec_login" class="btn btn-warning radius size-MINI" target="_blank">新版CDN缓存</a>
+    <a href="https://portal.chinanetcenter.com/cas/login?service=http%3A%2F%2Fmyview.chinanetcenter.com%2Fr_sec_login#0" class="btn btn-warning radius size-MINI" target="_blank">旧版CDN缓存（作废）</a>
+    <h6>日常管理</h6>
+    <a href-o="http://gr.uletm.com/pmdm/login.jsp" id="linkGR" class="btn btn-warning radius size-MINI" target="_blank">GR</a>
+    <a href="http://beta.ule.com/wd/" class="btn btn-warning radius size-MINI" target="_blank">前端小组文档</a>
+    <a href="http://wiki.uletm.com/dashboard.action" class="btn btn-warning radius size-MINI" target="_blank">ULE Wiki</a>
+    <a href="http://tomauth.ule.cn/cas/login" class="btn btn-warning radius size-MINI" target="_blank">运营中心</a>
+    <a href="http://cs.ule.com/csadmin/user_security_check.do" class="btn btn-warning radius size-MINI" target="_blank">业务管理平台</a>
+    <a href="http://dm.uletm.com/dmv2/user!login.do" class="btn btn-warning radius size-MINI" target="_blank">系统发布平台</a>
+    <h6>常用配置</h6>
+    <a href="http://www.uledev.com/setting?type=ftp" class="btn btn-warning radius size-MINI" target="_blank">配置ftp</a>
+    <a href="http://www.uledev.com/setting?type=print" class="btn btn-warning radius size-MINI" target="_blank">配置打印机</a>
+    <a href="http://www.uledev.com/setting?type=upan" class="btn btn-warning radius size-MINI" target="_blank">配置共享盘</a>
+    <a href="http://www.uledev.com/setting?type=opencms" class="btn btn-warning radius size-MINI" target="_blank">配置Opencms</a>
+    <h6>uledev 开发与使用</h6>
+    <a href="http://www.uledev.com/event" class="btn btn-warning radius size-MINI" target="_blank">创建活动</a>
+    <a href="https://github.com/boat3471/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev Github</a>
+    <a href="https://www.npmjs.com/package/uledev" class="btn btn-warning radius size-MINI" target="_blank">Uledev NPM</a>
+</div>
+
+<div class="info hide">
+    <h6>常用工具</h6>
+    <a href="#" class="btn btn-warning radius size-MINI" target="_blank">base64</a>
+    <a href="http://json.cn/" class="btn btn-warning radius size-MINI" target="_blank">JSON格式化</a>
+    <h6>模块化开发</h6>
+    <a href="http://seajs.org/docs/#intro" class="btn btn-warning radius size-MINI" target="_blank">seajs</a>
+    <a href="http://requirejs.org/" class="btn btn-warning radius size-MINI" target="_blank">requirejs</a>
+    <h6>第三方工具</h6>
+    <a href="http://underscorejs.org/" class="btn btn-warning radius size-MINI" target="_blank">underscore.js</a>
+    <a href="https://lodash.com/" class="btn btn-warning radius size-MINI" target="_blank">lodash</a>
+    <a href="http://danieltao.com/lazy.js/" class="btn btn-warning radius size-MINI" target="_blank">lazy.js</a>
+    <a href="http://momentjs.cn/" class="btn btn-warning radius size-MINI" target="_blank">momentjs</a>
+    <a href="http://www.bootcdn.cn/date-fns/" class="btn btn-warning radius size-MINI" target="_blank">date-fns</a>
+    <h6>CSS</h6>
+    <a href="http://www.uledev.com/h/lib/css-optimize.html" class="btn btn-warning radius size-MINI" target="_blank">CSS 优化方案</a>
+    <a href="http://www.uledev.com/h/lib/css-reset.html" class="btn btn-warning radius size-MINI" target="_blank">css reset</a>
+    <a href="http://www.uledev.com/h/lib/css-function.html" class="btn btn-warning radius size-MINI" target="_blank">css function</a>
+    <a href="http://nec.netease.com/" class="btn btn-warning radius size-MINI" target="_blank">网易CSS方案</a>
+    <h6>UI</h6>
+    <a href="http://www.bootcss.com/p/flat-ui/" class="btn btn-warning radius size-MINI" target="_blank">Flat UI</a>
+    <a href="http://www.h-ui.net/index.shtml" class="btn btn-warning radius size-MINI" target="_blank">H-ui 官网</a>
+    <a href="http://www.uledev.com/h/lib/sh.html" class="btn btn-warning radius size-MINI" data-toggle="tooltip" data-placement="right" title="SyntaxHighlighter" target="_blank">代码高亮使用</a>
+    <h6>jQuery</h6>
+    <a href="http://jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery 官网</a>
+    <a href="http://api.jquery.com/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api</a>
+    <a href="http://jquery.cuishifeng.cn/" class="btn btn-warning radius size-MINI" target="_blank">jQuery Api CN</a>
+    <a href="https://code.jquery.com/jquery/" class="btn btn-warning radius size-MINI" target="_blank">jQuery All Download</a>
+    <h6>Nodejs</h6>
+    <a href="https://nodejs.org/en/" class="btn btn-warning radius size-MINI" target="_blank">Nodejs</a>
+    <a href="http://nodejs.cn/" class="btn btn-warning radius size-MINI" target="_blank">Nodejs CN</a>
+    <h6>动效库</h6>
+    <a href="http://greensock.com/tweenlite" class="btn btn-warning radius size-MINI" target="_blank">GreenSock-TweenLite（需翻墙）</a>
+    <a href="http://ricostacruz.com/jquery.transit/" class="btn btn-warning radius size-MINI" target="_blank">jQuery.Transit</a>
+    <a href="http://paperjs.org/" class="btn btn-warning radius size-MINI" target="_blank">Paper.js</a>
+    <a href="http://visionmedia.github.io/move.js/" class="btn btn-warning radius size-MINI" target="_blank">Move.js</a>
+    <a href="http://leaverou.github.io/animatable/" class="btn btn-warning radius size-MINI" target="_blank">animatable</a>
+    <a href="http://www.createjs.com/" class="btn btn-warning radius size-MINI" target="_blank">Createjs</a>
+    <h6>常用网站</h6>
+    <a href="http://www.w3school.com.cn/index.html" class="btn btn-warning radius size-MINI" target="_blank">w3school</a>
+</div>
+
+<div class="info hide">
+    <% articles.forEach(function(item){ %>
+    <a href="<%= item.url %>" class="btn btn-warning radius size-MINI" target="_blank"><%= item.name %></a>
+    <% }); %>
+</div>
 <!-- 登录模块 -->
 <div id="modalLogin" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -169,7 +146,7 @@
         </div>
     </div>
 </div>
-
+<a id="loginIn" class="login-in">登录</a>
 
 <script src="/m/sea.js"></script>
 <script>seajs.use('/j/index');</script>

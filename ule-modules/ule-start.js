@@ -5,6 +5,7 @@
 var fs = require('fs');
 var path = require('path');
 var moment = require('moment');
+var tool = require('./ule-tool');
 var uledev = require('./../uledev');
 var hosts = require('./../ule-modules/ule-hosts');
 var app = require('../ule-server/app');
@@ -22,9 +23,9 @@ function _createLaunchFile(){
 
 /* 创建目录结构 */
 function _createDirectory(){
-	uledev.mkdirs(ownPath, 'wwwroot');
-	uledev.mkdirs(ownPath, 'webroot');
-	uledev.mkdirs(ownPath, 'webroot-src');
+	tool.mkdirs(ownPath, 'wwwroot');
+	tool.mkdirs(ownPath, 'webroot');
+	tool.mkdirs(ownPath, 'webroot-src');
 }
 
 /* 创建个人配置文件 */
@@ -33,7 +34,7 @@ function _createOwnUleDevJsonFile(){
 	if(fs.existsSync(ownUledevPath)) return;
 	var uledevData = require('../ule-conf/uledev.json');
 	uledevData.dir.ownPath = ownPath;
-	uledev.writeJsonFile(uledevData, ownUledevPath);
+	tool.writeJsonFile(uledevData, ownUledevPath);
 	console.info('[ULE] 创建配置: ', ownUledevPath);
 }
 
@@ -48,9 +49,9 @@ function _readOwnDirectory(){
 				var filePath = ownPath + '\\' + fileName;
 				var file = fs.statSync(filePath);
 				if(file.isDirectory()) {
-					uledev.mkdirs(ownPath, fileName, 'wwwroot');
-					uledev.mkdirs(ownPath, fileName, 'webroot');
-					uledev.mkdirs(ownPath, fileName, 'webroot-src');
+					tool.mkdirs(ownPath, fileName, 'wwwroot');
+					tool.mkdirs(ownPath, fileName, 'webroot');
+					tool.mkdirs(ownPath, fileName, 'webroot-src');
 				}
 				log(filePath, file.isDirectory());
 			}

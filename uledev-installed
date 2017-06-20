@@ -1,10 +1,46 @@
 #!/usr/bin/env node
+var fs = require('fs');
+var path = require('path');
 var read = require('read');
+var tool = require('./ule-modules/ule-tool');
+
 var uledev = require('./uledev');
-var username = process.env.username;
+
 var hosts = require('./ule-modules/ule-hosts');
 
-read({prompt: '请输入你的名称: ', default: username}, function(a, value){
-	uledev.install(value);
+function install(username){
+	// 初始化PID文件 uledev-pid.json
+	var pidPath = path.join(__dirname, '/ule-conf/uledev-pid.json');
+	if(!fs.existsSync(pidPath)) fs.writeFileSync(pidPath, '0');
+	
+	// 初始化全局配置文件 uledev.json
+	var uledevConfPath = path.join(__dirname, '/ule-conf/uledev.json');
+	if(!fs.existsSync(uledevConfPath)) tool.writeJsonFile({}, uledevConfPath);
+	
+	var uledevJson = require(uledevConfPath);
+	uledevJson.installDate = uledevJson.installDate || tool.currentDate();
+	uledevJson.updateDate = tool.currentDate();
+	uledevJson.username = username;
+	uledevJson.port = 80;
+	uledevJson.dir = uledevJson.dir || {};
+	uledevJson.dir.installPath = __dirname;
+	uledevJson.dir.confPath = __dirname + '\\ule-conf';
+	uledevJson.dir.modulesPath = __dirname + '\\ule-modules';
+	uledevJson.dir.serverPath = __dirname + '\\ule-server';
+	uledevJson.css = uledevJson.css || {};
+	uledevJson.css.type = uledevJson.css.type || 'gulp-stylus';
+	tool.writeJsonFile(uledevJson, uledevConfPath);
+	
+	console.info('');
+	console.info('★ 你好 ' + username + '！欢迎安装uledev开发环境\n');
+	console.info('★ 安装目录: ' + uledevJson.dir.installPath);
+	console.info('★ 配置目录: ' + uledevJson.dir.confPath);
+	console.info('★ 模块目录: ' + uledevJson.dir.modulesPath);
+	console.info('★ 服务目录: ' + uledevJson.dir.serverPath + '\n');
+	console.info('★ 安装完成！\n');
+}
+
+read({prompt: '请输入你的名称: ', default: process.env.username}, function(a, value){
+	install(value);
 	hosts.init();
 });

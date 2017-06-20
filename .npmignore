@@ -3,6 +3,7 @@
 .idea
 /_
 /node_modules
+/ule-conf/uledev-user.json
 /ule-conf/uledev-pid.json
 /ule-conf/uledev.json
 /ule-conf/.dev

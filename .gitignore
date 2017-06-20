@@ -3,4 +3,5 @@
 /node_modules
 /ule-conf/uledev.json
 /ule-conf/uledev-pid.json
+/ule-conf/uledev-user.json
 /ule-conf/.dev

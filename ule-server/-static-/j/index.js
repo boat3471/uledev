@@ -3,21 +3,27 @@ define(function(require, exports, module){
 	require('jquery_validate');
 	
 	var uledev = require('uledev');
-	var loginName = '';
-	var passWord = '';
-	
 	
 	$(function(){
 		$("[data-toggle='tooltip']").tooltip();
-		$.Huifold("#Huifold3 .item h4", "#Huifold3 .item .info", "fast", 3, "click");
+	});
+	
+	$('#nav').on('click', 'li', function(){
+		var $this = $(this);
+		$this.siblings().removeClass('current');
+		var index = $this.addClass('current').index();
+		$('body > .info').addClass('hide').eq(index).toggleClass('hide');
 	});
 	
 	$('#linkGR').on('click', function(){
-		var $this = $(this);
-		var url = $this.attr('href-o');
-		if(loginName && passWord)
-			url = url + '?ln=' + loginName + '&&pw=' + passWord;
-		window.open(url);
+		$.ajax({
+			url: 'my/loginGR',
+			type: 'POST',
+			success: function(data){
+				if(data && data.url)
+					window.open(data.url);
+			}
+		});
 	});
 	
 	$.extend($.validator.messages, {
@@ -36,11 +42,39 @@ define(function(require, exports, module){
 	
 	$('#formLogin').validate({
 		submitHandler: function(){
-			loginName = $('#loginname').val();
-			passWord = $('#password').val();
-			$("#modalLogin").modal("hide");
+			var loginName = $('#loginname').val();
+			var passWord = $('#password').val();
+			
+			$.ajax({
+				url: 'my/login',
+				type: 'POST',
+				data: {
+					loginName: loginName,
+					password: passWord
+				},
+				success: function(data){
+					console.log(data);
+					$("#modalLogin").modal("hide");
+				}
+			});
 		}
 	});
 	
-	$("#modalLogin").modal("show");
+	$('#loginIn').on('click', function(){
+		$("#modalLogin").modal("show");
+	});
+	
+	$.ajax({
+		url: 'my/loginCheck',
+		data: {},
+		type: 'POST',
+		success: function(data){
+			data = data || {};
+			if(data.code == '0'){
+				//$("#modalLogin").modal("hide");
+			}else{
+				$("#modalLogin").modal("show");
+			}
+		}
+	});
 });

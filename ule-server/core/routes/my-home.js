@@ -1,34 +1,57 @@
-var fs = require('fs');
 var url = require('url');
 var router = __express.Router();
 var formidable = require('formidable');
-var cmd = require('child_process');
 var marked = require('marked');
-
+var path = require('path');
 var config = uledev.config;
+var tool = require('../../../ule-modules/ule-tool');
+var loginInfo = require('../../../ule-conf/uledev-user.json');
 
 /* home page. */
 router.get('/', function(req, res, next){
 	var host = req.headers.host;
 	var articles = require('../../-static-/h/articles/map.json');
-	// if(host === 'www.uledev.com')
-		res.render('index.ejs', {
-			title: 'uledev',
-			username: config.username,
-			installPath: config.dir.installPath,
-			articles: articles
-		});
-	// else
+	res.render('index.ejs', {
+		title: 'uledev',
+		username: config.username,
+		installPath: config.dir.installPath,
+		articles: articles
+	});
 	// 	res.redirect('//www.uledev.com/404');
 });
 
-router.get('/md', function(req, res, next) {
+router.post('/login', function(req, res, next){
+	var query = req.body;
+	loginInfo.loginName = query.loginName;
+	loginInfo.passWord = query.password;
+	var data = {
+		loginName: loginInfo.loginName,
+		passWord: loginInfo.passWord
+	};
+	tool.writeJsonFile(data, '/ule-conf/uledev-user.json');
+	res.json({code: '0', msg: ''});
+});
+
+router.post('/loginCheck', function(req, res, next){
+	var data;
+	if(loginInfo.loginName && loginInfo.passWord)
+		data = {code: '0', msg: '无需登录'};
+	else
+		data = {code: '1', msg: '需登录'};
+	res.json(data);
+});
+
+router.post('/loginGR', function(req, res, next){
+	var data =  {code: '0', msg: ''}, url = 'http://gr.uletm.com/pmdm/login.jsp';
+	if(loginInfo.loginName && loginInfo.passWord)
+		data.url = url + '?ln=' + loginInfo.loginName + '&&pw=' + loginInfo.passWord;
+	else
+		data.url = url;
+	res.json(data);
+});
+
+router.get('/md', function(req, res, next){
 	var base = config.dir.serverPath;
-	fs.readFile(base + '/-static-/md/1.md', function(err, data) {
-		var html = marked(data.toString());
-		//res.render('markdown.ejs', {mdContent: html});
-		res.send(html);
-	});
 });
 
 /* GET event page. */
@@ -43,9 +66,6 @@ router.post('/eventDirectorySet.do', function(req, res, next){
 	form.parse(req, function(err, fields, files){
 		var file = files['eventDirectoryFileInput'];
 		if(file && file.name == 'uledev.json'){
-			var fileData = fs.readFileSync(file.path);
-			var data = JSON.parse(fileData.toString());
-			log(data.devPath, file.name);
 			res.redirect('/event?initSuccess');
 		}else{
 			res.redirect('/event?initError');

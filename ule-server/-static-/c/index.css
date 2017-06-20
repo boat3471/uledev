@@ -1,0 +1,25 @@
+html, body{ padding:0; margin:0; font:12px "微软雅黑", "宋体"; }
+body{ overflow-y:auto; min-width:1010px; padding:0 20px; }
+li{ font-size:12px; }
+code{ font-family:Consolas; color:#8B2323; padding:0 15px; }
+table{ border-collapse:collapse; }
+table td{ text-align:center; }
+h6{ font-weight:bold; padding:0; margin:6px 0; border-bottom:dashed 1px tan; line-height:20px; }
+label.error{ position:relative; float:right; top:auto; right:auto; }
+.main-title{ padding:5px 0 10px; }
+.main-title span:first-child{ vertical-align:middle; font-weight:bold; }
+.main-title span:last-child{ font-size:12px; color:#ccc; font-weight:normal; padding-left:20px; }
+.main{ }
+.Huifold .item h4{ font-size:12px; padding:3px 6px; background-color:#5a98de; color:#fff; }
+.Huifold .item h4 b{ float:left; position:static; font-size:16px; color:#d2edfa; }
+.Huifold .item .info{ padding-bottom:20px; }
+.modal-dialog{ width:400px; }
+.modal-header{ padding:8px 15px; }
+.modal-header .close{ top:12px; }
+.modal-body input{ margin:8px 0; }
+.modal-body input[type=submit]{ width:100%; }
+.modal-body > form > div{ position:relative; }
+.login-in{ position:fixed; right:30px; top:0; line-height:48px; }
+.nav > ul > li{ margin-right:1px; }
+.info{ padding:0 30px; }
+.modal{ top:80px; }
